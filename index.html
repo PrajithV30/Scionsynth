@@ -336,11 +336,11 @@
             align-items: center;
             justify-content: center;
             padding: 0.9rem 2.2rem;
-            background: var(--accent);
+            background: linear-gradient(90deg, var(--accent), #39ff14);
             color: var(--text-dark);
             border: none;
             font-size: 0.95rem;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             text-decoration: none;
@@ -348,27 +348,36 @@
             overflow: hidden;
             transition: all 0.4s var(--ease-out);
             border-radius: 8px;
-            /* More sophisticated rounded edge */
-            box-shadow: 0 4px 20px var(--accent-glow);
+            box-shadow: 0 0 25px rgba(204, 255, 0, 0.6), 0 0 45px rgba(57, 255, 20, 0.4);
         }
 
         .btn::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
             transform: translateX(-100%);
             transition: transform 0.6s var(--ease-main);
         }
 
         .btn:hover {
-            background: #dfff33;
-            box-shadow: 0 8px 30px rgba(204, 255, 0, 0.4);
-            transform: translateY(-2px);
+            background: linear-gradient(90deg, #dfff33, #5cff3b);
+            box-shadow: 0 0 40px rgba(204, 255, 0, 0.8), 0 0 70px rgba(57, 255, 20, 0.6);
+            transform: translateY(-3px) scale(1.02);
         }
 
         .btn:hover::after {
             transform: translateX(100%);
+        }
+
+        .btn-pulse {
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 25px rgba(204, 255, 0, 0.6), 0 0 45px rgba(57, 255, 20, 0.4); transform: scale(1); }
+            50% { box-shadow: 0 0 40px rgba(204, 255, 0, 0.9), 0 0 80px rgba(57, 255, 20, 0.7); transform: scale(1.02); }
+            100% { box-shadow: 0 0 25px rgba(204, 255, 0, 0.6), 0 0 45px rgba(57, 255, 20, 0.4); transform: scale(1); }
         }
 
         .btn-outline {
@@ -972,7 +981,7 @@
         <a href="#" class="logo clickable">SCION<span>SYNTH</span></a>
         <div class="nav-links">
             <a href="#how-it-works" class="clickable">Deployment</a>
-            <a href="#pricing" class="clickable">Architectures</a>
+            <a href="#pricing" class="clickable">Pricing</a>
             <a href="#about" class="clickable">Conviction</a>
         </div>
         <a href="#contact" class="btn clickable">Book Audit</a>
@@ -1033,106 +1042,14 @@
 
     <!-- Services & Pricing -->
     <section id="pricing" class="pricing-section">
-        <div class="container">
-            <h2 class="text-heading reveal" style="text-align: center;">Operational <span
-                    class="text-accent">Architectures</span></h2>
-
-            <div class="cards-wrapper reveal">
-                <!-- Starter -->
-                <div class="price-card tilt-card clickable">
-                    <h3 class="price-name">Starter</h3>
-                    <div class="price-cost">$400<span
-                            style="font-size: 1.2rem; color: var(--text-muted); font-weight: 500;">–$600</span></div>
-                    <p class="price-tag">One clean automation. One solved problem.</p>
-                    <ul class="price-features">
-                        <li>1 automated workflow (up to 4 app connections)</li>
-                        <li>Trigger → filter → action logic, built and tested</li>
-                        <li>1 revision round included</li>
-                        <li>30-day async email support</li>
-                        <li>Delivered in 3–5 business days</li>
-                    </ul>
-                </div>
-
-                <!-- Growth System -->
-                <div class="price-card tilt-card clickable"
-                    style="border-color: rgba(204,255,0,0.3); background: rgba(204,255,0,0.03);">
-                    <div class="popular-badge">Most Popular</div>
-                    <h3 class="price-name">Growth System</h3>
-                    <div class="price-cost">$900<span
-                            style="font-size: 1.2rem; color: var(--text-muted); font-weight: 500;">–$1,500</span></div>
-                    <p class="price-tag">A full operational backbone for your business.</p>
-                    <ul class="price-features">
-                        <li>3 connected workflows built as one system</li>
-                        <li>AI layer included (Claude or GPT-4o for smart routing)</li>
-                        <li>Full documentation + Loom walkthrough video</li>
-                        <li>2 revision rounds + 60-day support</li>
-                        <li>Delivered in 7–10 business days</li>
-                    </ul>
-                </div>
-
-                <!-- AI Agent Build -->
-                <div class="price-card tilt-card clickable">
-                    <h3 class="price-name">AI Agent</h3>
-                    <div class="price-cost">$2,000<span
-                            style="font-size: 1.2rem; color: var(--text-muted); font-weight: 500;">+</span></div>
-                    <p class="price-tag">A 24/7 intelligent system that thinks and acts.</p>
-                    <ul class="price-features">
-                        <li>Custom AI agent with memory, tools & logic</li>
-                        <li>Built on n8n with native AI agent node</li>
-                        <li>Handles lead qualification & autonomous ops</li>
-                        <li>Full deployment, documentation, and handoff</li>
-                        <li>Delivered in 10–15 business days</li>
-                    </ul>
-                </div>
+        <div class="container" style="text-align: center;">
+            <h2 class="text-heading reveal" style="margin-bottom: 2rem; max-width: 1000px; margin-left: auto; margin-right: auto; line-height: 1.2;">Every business is different — no two workflows are the <span class="text-accent">same.</span></h2>
+            <p class="reveal text-muted" style="max-width: 600px; margin: 0 auto 4rem; font-size: 1.15rem; line-height: 1.6;">
+                Custom pricing based on your goals. Book a free 20-min audit to get started.
+            </p>
+            <div class="reveal">
+                <a href="https://calendly.com/prajith30v/30min" target="_blank" class="btn btn-pulse clickable">Book Free Audit Call</a>
             </div>
-
-            <!-- Comparison Table -->
-            <div class="comparison-table-wrapper reveal">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Capabilities</th>
-                            <th>Starter</th>
-                            <th>Growth System</th>
-                            <th>AI Agent Build</th>
-                            <th>Retainer ($800/mo)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="feature-col">Scope</td>
-                            <td>1 Workflow</td>
-                            <td>3 Connected Workflows</td>
-                            <td>Custom Autonomous Agent</td>
-                            <td>Up to 4 updates/mo</td>
-                        </tr>
-                        <tr>
-                            <td class="feature-col">AI Integration</td>
-                            <td>Standard Logic</td>
-                            <td>Claude/GPT-4o Layer</td>
-                            <td>Memory + Tools + Logic</td>
-                            <td>Ongoing Tuning</td>
-                        </tr>
-                        <tr>
-                            <td class="feature-col">Revisions</td>
-                            <td>1 Round</td>
-                            <td>2 Rounds</td>
-                            <td>Extensive Handoff</td>
-                            <td>Monthly Strategy Call</td>
-                        </tr>
-                        <tr>
-                            <td class="feature-col">Support</td>
-                            <td>30-day Async</td>
-                            <td>60-day Support</td>
-                            <td>60-day Support</td>
-                            <td>24hr Priority Response</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <p class="retainer-note reveal">Automation that keeps pace as you grow. Cancel anytime, no contracts.
-                <br><span class="text-accent">3 retainer clients = $2,400–$7,500/month recurring ROI.</span></p>
         </div>
     </section>
 
@@ -1178,14 +1095,14 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <h3>SCION<span>SYNTH</span></h3>
-                <p>AI Automation Specialist | Architectures</p>
+                <p>AI Automation Specialist | Pricing</p>
             </div>
             <div class="footer-links" style="grid-column: span 2;">
                 <h4>Platform Navigation</h4>
                 <ul style="display: flex; gap: 2rem; flex-wrap: wrap;">
                     <li><a href="#hero" class="clickable">Home</a></li>
                     <li><a href="#how-it-works" class="clickable">Deployment</a></li>
-                    <li><a href="#pricing" class="clickable">Architectures</a></li>
+                    <li><a href="#pricing" class="clickable">Pricing</a></li>
                     <li><a href="#about" class="clickable">Conviction</a></li>
                 </ul>
             </div>
