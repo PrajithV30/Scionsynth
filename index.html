@@ -274,6 +274,7 @@
             0% {
                 background-position: 0 0;
             }
+
             100% {
                 background-position: 60px 60px;
             }
@@ -391,9 +392,20 @@
         }
 
         @keyframes pulse-glow {
-            0% { box-shadow: 0 0 25px rgba(204, 255, 0, 0.6), 0 0 45px rgba(57, 255, 20, 0.4); transform: scale(1); }
-            50% { box-shadow: 0 0 40px rgba(204, 255, 0, 0.9), 0 0 80px rgba(57, 255, 20, 0.7); transform: scale(1.02); }
-            100% { box-shadow: 0 0 25px rgba(204, 255, 0, 0.6), 0 0 45px rgba(57, 255, 20, 0.4); transform: scale(1); }
+            0% {
+                box-shadow: 0 0 25px rgba(204, 255, 0, 0.6), 0 0 45px rgba(57, 255, 20, 0.4);
+                transform: scale(1);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(204, 255, 0, 0.9), 0 0 80px rgba(57, 255, 20, 0.7);
+                transform: scale(1.02);
+            }
+
+            100% {
+                box-shadow: 0 0 25px rgba(204, 255, 0, 0.6), 0 0 45px rgba(57, 255, 20, 0.4);
+                transform: scale(1);
+            }
         }
 
         .btn-outline {
@@ -419,9 +431,11 @@
             align-items: center;
             gap: 0.5rem;
         }
+
         .btn-nav svg {
             transition: transform 0.3s var(--ease-out);
         }
+
         .btn-nav:hover svg {
             transform: translate(2px, -2px);
         }
@@ -440,6 +454,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 1001;
         }
+
         .mobile-overlay {
             position: fixed;
             inset: 0;
@@ -455,10 +470,12 @@
             pointer-events: none;
             transition: opacity 0.4s var(--ease-main);
         }
+
         .mobile-overlay.active {
             opacity: 1;
             pointer-events: all;
         }
+
         .mobile-overlay a {
             font-size: 2rem;
             font-family: var(--font-display);
@@ -470,14 +487,27 @@
             opacity: 0;
             transition: all 0.4s var(--ease-out);
         }
+
         .mobile-overlay.active a {
             transform: translateY(0);
             opacity: 1;
         }
-        .mobile-overlay a:nth-child(1) { transition-delay: 0.1s; }
-        .mobile-overlay a:nth-child(2) { transition-delay: 0.15s; }
-        .mobile-overlay a:nth-child(3) { transition-delay: 0.2s; }
-        .mobile-overlay a:nth-child(4) { transition-delay: 0.25s; }
+
+        .mobile-overlay a:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .mobile-overlay a:nth-child(2) {
+            transition-delay: 0.15s;
+        }
+
+        .mobile-overlay a:nth-child(3) {
+            transition-delay: 0.2s;
+        }
+
+        .mobile-overlay a:nth-child(4) {
+            transition-delay: 0.25s;
+        }
 
         /* Floating Nav Button */
         .floating-cta {
@@ -493,12 +523,15 @@
             .mobile-menu-btn {
                 display: flex;
             }
+
             .nav-links {
                 display: none;
             }
+
             nav .btn-nav {
                 display: none;
             }
+
             .floating-cta {
                 display: inline-flex;
             }
@@ -510,13 +543,23 @@
             transform: translateY(30px);
             transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
         }
+
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
-        .delay-1 { transition-delay: 0.1s; }
-        .delay-2 { transition-delay: 0.2s; }
-        .delay-3 { transition-delay: 0.3s; }
+
+        .delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.3s;
+        }
 
         /* Hero */
         .hero {
@@ -529,12 +572,13 @@
         }
 
         canvas#nodeGraph {
-            position: absolute;
+            position: fixed;
             inset: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
             opacity: 0.4;
+            pointer-events: none;
         }
 
         .hero-content {
@@ -544,8 +588,18 @@
             transform: translateY(20px);
             opacity: 0;
             transition: all 1.5s var(--ease-main) 0.5s;
-            max-width: 900px;
+            max-width: 700px;
             padding-top: 12rem;
+        }
+
+        canvas#dnaCanvas {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
         }
 
         body.loaded .hero-content {
@@ -587,9 +641,20 @@
         }
 
         @keyframes pulse-dot-anim {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1); }
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.4;
+                transform: scale(0.8);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .hero .subline {
@@ -691,15 +756,17 @@
 
         /* Services / Capabilities (Bento Grid) */
         .services-section {
-            background: var(--bg-color);
+            background: transparent;
             position: relative;
         }
+
         .services-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
             margin-top: 3rem;
         }
+
         .service-card {
             background: rgba(17, 17, 17, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -714,6 +781,7 @@
             justify-content: flex-end;
             min-height: 280px;
         }
+
         .service-card::before {
             content: '';
             position: absolute;
@@ -723,36 +791,59 @@
             opacity: 0;
             transition: opacity 0.5s;
         }
+
         .service-card:hover::before {
             opacity: 1;
         }
+
         @media (min-width: 768px) {
-            .service-card:nth-child(1) { grid-column: span 2; }
-            .service-card:nth-child(2) { grid-column: span 1; }
-            .service-card:nth-child(3) { grid-column: span 1; }
-            .service-card:nth-child(4) { grid-column: span 2; }
+            .service-card:nth-child(1) {
+                grid-column: span 2;
+            }
+
+            .service-card:nth-child(2) {
+                grid-column: span 1;
+            }
+
+            .service-card:nth-child(3) {
+                grid-column: span 1;
+            }
+
+            .service-card:nth-child(4) {
+                grid-column: span 2;
+            }
         }
+
         @media (max-width: 767px) {
-            .services-grid { grid-template-columns: 1fr; }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
         }
-        .service-icon, .service-card h3, .service-card p {
+
+        .service-icon,
+        .service-card h3,
+        .service-card p {
             position: relative;
             z-index: 1;
         }
+
         .service-card:hover {
             border-color: rgba(204, 255, 0, 0.2);
             transform: translateY(-2px);
         }
+
         .service-icon {
             font-size: 2.5rem;
             margin-bottom: auto;
             padding-bottom: 2rem;
         }
+
         .service-card h3 {
             font-size: 1.5rem;
             color: var(--text-main);
             margin-bottom: 0.8rem;
         }
+
         .service-card p {
             color: var(--text-muted);
             font-size: 1rem;
@@ -761,7 +852,7 @@
 
         /* Pricing horizontally with tilt */
         .pricing-section {
-            background: var(--bg-color);
+            background: transparent;
             border-top: 1px solid rgba(255, 255, 255, 0.03);
         }
 
@@ -964,7 +1055,7 @@
 
         /* CTA & Contact */
         .contact-section {
-            background: var(--surface);
+            background: transparent;
             padding: 10rem 0;
             text-align: center;
             position: relative;
@@ -1017,7 +1108,7 @@
         footer {
             padding: 6rem 5% 3rem;
             border-top: 1px solid rgba(255, 255, 255, 0.03);
-            background: var(--bg-color);
+            background: transparent;
         }
 
         .footer-grid {
@@ -1081,6 +1172,15 @@
         }
 
         @media (max-width: 992px) {
+            .hero-content {
+                margin-left: 0;
+                max-width: 100%;
+            }
+            canvas#dnaCanvas {
+                width: 100%;
+                opacity: 0.2;
+                pointer-events: none;
+            }
             .cards-wrapper {
                 flex-direction: column;
             }
@@ -1133,6 +1233,7 @@
     <div class="ambient-glow ambient-glow-2"></div>
     <div class="cursor-dot"></div>
     <div class="cursor-ring"></div>
+    <canvas id="nodeGraph"></canvas>
 
     <!-- Intro Loader -->
     <div class="loader">
@@ -1150,11 +1251,20 @@
         </div>
         <div style="display: flex; gap: 1rem; align-items: center;">
             <a href="#contact" class="btn btn-nav clickable">
-                Book a call 
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+                Book a call
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 7h10v10"></path>
+                    <path d="M7 17 17 7"></path>
+                </svg>
             </a>
             <button class="mobile-menu-btn clickable" id="mobileMenuBtn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
             </button>
         </div>
     </nav>
@@ -1171,14 +1281,16 @@
     <section class="hero" id="hero">
         <div class="hero-gradient-overlay"></div>
         <div class="grid-bg" id="parallax-bg"></div>
-        <canvas id="nodeGraph"></canvas>
+        <canvas id="dnaCanvas"></canvas>
         <div class="container hero-content">
             <div class="hero-badge reveal">
                 <span class="pulse-dot"></span>
                 Keep your money safe
             </div>
-            <h1 class="text-display reveal delay-1">Automate <span class="text-accent">the Boring.</span><br>Scale the Meaningful.</h1>
-            <p class="subline reveal delay-2">Custom AI automation systems for modern businesses — built on robust architecture. No
+            <h1 class="text-display reveal delay-1">Automate <span class="text-accent">the Boring.</span><br>Scale the
+                Meaningful.</h1>
+            <p class="subline reveal delay-2">Custom AI automation systems for modern businesses — built on robust
+                architecture. No
                 code needed on your end. High impact setups in 5–10 days.</p>
             <div class="hero-buttons reveal delay-3">
                 <a href="#contact" class="btn btn-pulse clickable">Initiate System Build</a>
@@ -1191,7 +1303,8 @@
     <section id="how-it-works">
         <div class="container">
             <h2 class="text-heading reveal" style="margin-bottom: 2rem;">Deployment<br>Protocol.</h2>
-            <p class="reveal delay-1 text-muted" style="max-width: 500px; font-size: 1.05rem; margin-bottom: 4rem;">We map your
+            <p class="reveal delay-1 text-muted" style="max-width: 500px; font-size: 1.05rem; margin-bottom: 4rem;">We
+                map your
                 current workflow and find exactly where you're losing time and money with extreme precision.</p>
 
             <div class="steps-container">
@@ -1226,27 +1339,32 @@
     <!-- Capabilities -->
     <section id="services" class="services-section">
         <div class="container">
-            <h2 class="text-heading reveal" style="margin-bottom: 3rem; text-align: center;">Our <span class="text-accent">Capabilities.</span></h2>
+            <h2 class="text-heading reveal" style="margin-bottom: 3rem; text-align: center;">Our <span
+                    class="text-accent">Capabilities.</span></h2>
             <div class="services-grid">
                 <div class="service-card reveal delay-1">
                     <div class="service-icon">💬</div>
                     <h3>AI Customer Support</h3>
-                    <p>Intelligent agents that resolve 80% of customer inquiries instantly. Trained on your specific docs and tone of voice.</p>
+                    <p>Intelligent agents that resolve 80% of customer inquiries instantly. Trained on your specific
+                        docs and tone of voice.</p>
                 </div>
                 <div class="service-card reveal delay-2">
                     <div class="service-icon">📊</div>
                     <h3>Automated Lead Routing</h3>
-                    <p>Capture, qualify, and route leads into your CRM automatically. Never let a high-intent prospect slip through the cracks.</p>
+                    <p>Capture, qualify, and route leads into your CRM automatically. Never let a high-intent prospect
+                        slip through the cracks.</p>
                 </div>
                 <div class="service-card reveal delay-1">
                     <div class="service-icon">⚙️</div>
                     <h3>Internal Workflow Bots</h3>
-                    <p>Connect your fragmented tools (Slack, Notion, Airtable, etc.) with custom webhooks to eliminate manual data entry.</p>
+                    <p>Connect your fragmented tools (Slack, Notion, Airtable, etc.) with custom webhooks to eliminate
+                        manual data entry.</p>
                 </div>
                 <div class="service-card reveal delay-2">
                     <div class="service-icon">🧠</div>
                     <h3>Custom LLM Solutions</h3>
-                    <p>Private models fine-tuned for specialized tasks like contract analysis, content generation, or bespoke data extraction.</p>
+                    <p>Private models fine-tuned for specialized tasks like contract analysis, content generation, or
+                        bespoke data extraction.</p>
                 </div>
             </div>
         </div>
@@ -1256,31 +1374,42 @@
     <section id="pricing" class="pricing-section">
         <div class="container">
             <div style="text-align: center;">
-                <h2 class="text-heading reveal" style="margin-bottom: 2rem; max-width: 1000px; margin-left: auto; margin-right: auto; line-height: 1.2;">Tailored <span class="text-accent">Pricing.</span> Infinite ROI.</h2>
+                <h2 class="text-heading reveal"
+                    style="margin-bottom: 2rem; max-width: 1000px; margin-left: auto; margin-right: auto; line-height: 1.2;">
+                    Tailored <span class="text-accent">Pricing.</span> Infinite ROI.</h2>
             </div>
 
             <div class="cards-wrapper" style="justify-content: center;">
                 <!-- Single Custom Pricing Card -->
-                <div class="price-card tilt-card reveal delay-1" style="max-width: 550px; border-color: rgba(204, 255, 0, 0.4); box-shadow: 0 20px 50px rgba(204, 255, 0, 0.05); padding-top: 4.5rem;">
-                    <div class="popular-badge" style="padding: 0.6rem 2rem; font-size: 0.85rem;">Bespoke Engagements</div>
-                    <h3 class="price-name" style="text-align: center; font-size: 2.4rem; margin-bottom: 1.5rem;">Custom Architecture</h3>
-                    
-                    <p style="color: var(--text-main); text-align: center; margin-bottom: 2.5rem; font-size: 1.1rem; line-height: 1.7; opacity: 0.9;">
-                        Every business operates uniquely. We reject one-size-fits-all templates in favor of precise, high-impact systems. Your investment is meticulously calibrated based on your specific requirements, workflow complexity, and scalability goals.
+                <div class="price-card tilt-card reveal delay-1"
+                    style="max-width: 550px; border-color: rgba(204, 255, 0, 0.4); box-shadow: 0 20px 50px rgba(204, 255, 0, 0.05); padding-top: 4.5rem;">
+                    <div class="popular-badge" style="padding: 0.6rem 2rem; font-size: 0.85rem;">Bespoke Engagements
+                    </div>
+                    <h3 class="price-name" style="text-align: center; font-size: 2.4rem; margin-bottom: 1.5rem;">Custom
+                        Architecture</h3>
+
+                    <p
+                        style="color: var(--text-main); text-align: center; margin-bottom: 2.5rem; font-size: 1.1rem; line-height: 1.7; opacity: 0.9;">
+                        Every business operates uniquely. We reject one-size-fits-all templates in favor of precise,
+                        high-impact systems. Your investment is meticulously calibrated based on your specific
+                        requirements, workflow complexity, and scalability goals.
                     </p>
-                    
-                    <ul class="price-features" style="margin-bottom: 2.5rem; display: flex; flex-direction: column; gap: 0.5rem; max-width: 400px; margin-left: auto; margin-right: auto;">
+
+                    <ul class="price-features"
+                        style="margin-bottom: 2.5rem; display: flex; flex-direction: column; gap: 0.5rem; max-width: 400px; margin-left: auto; margin-right: auto;">
                         <li>Bespoke system design and workflow mapping</li>
                         <li>Seamless integration with your existing stack</li>
                         <li>Dedicated post-launch support and iteration</li>
                         <li>ROI-focused automation architecture</li>
                     </ul>
-                    <a href="#contact" class="btn clickable" style="width: 100%; text-align: center; padding: 1.2rem;">Book a Free Audit</a>
+                    <a href="#contact" class="btn clickable"
+                        style="width: 100%; text-align: center; padding: 1.2rem;">Book a Free Audit</a>
                 </div>
             </div>
-            
+
             <div class="retainer-note reveal" style="margin-top: 4rem;">
-                <strong>Need ongoing maintenance?</strong> Retainer packages are available post-launch to continuously optimize and upgrade your systems as you scale.
+                <strong>Need ongoing maintenance?</strong> Retainer packages are available post-launch to continuously
+                optimize and upgrade your systems as you scale.
             </div>
         </div>
     </section>
@@ -1293,7 +1422,8 @@
             <p>I build <strong>invisible infrastructure</strong>. Systems that work silently in the background—capturing
                 leads, routing data, answering queries, and executing processes with zero human error.</p>
             <p>If this saves your team 10 hrs/week at $35/hr, that's $1,400/month saved. <strong
-                    class="narrative-highlight">Your custom automation pays for itself in weeks, not years.</strong> Most
+                    class="narrative-highlight">Your custom automation pays for itself in weeks, not years.</strong>
+                Most
                 clients see full ROI within 30 days. It's 10× faster than hiring a developer, 5× cheaper, and requires
                 zero codebase to maintain.</p>
         </div>
@@ -1339,6 +1469,7 @@
                     overflow: hidden;
                     margin-bottom: 0.5rem;
                 }
+
                 .premium-wa-btn::before {
                     content: '';
                     position: absolute;
@@ -1347,32 +1478,40 @@
                     transform: translateX(-100%);
                     transition: transform 0.8s var(--ease-main);
                 }
+
                 .premium-wa-btn:hover {
                     border-color: rgba(37, 211, 102, 0.4);
                     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(37, 211, 102, 0.15);
                     transform: translateY(-3px);
                     background: rgba(37, 211, 102, 0.03);
                 }
+
                 .premium-wa-btn:hover::before {
                     transform: translateX(100%);
                 }
+
                 .premium-wa-icon {
                     fill: #25D366;
                     transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
                 }
+
                 .premium-wa-btn:hover .premium-wa-icon {
                     transform: scale(1.15) rotate(5deg);
                 }
             </style>
-            <div class="reveal" style="margin-top: 4rem; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
+            <div class="reveal"
+                style="margin-top: 4rem; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
                 <a href="https://wa.me/" target="_blank" class="clickable premium-wa-btn">
-                    <svg class="premium-wa-icon" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.489-1.761-1.662-2.06-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+                    <svg class="premium-wa-icon" width="24" height="24" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.489-1.761-1.662-2.06-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
                     </svg>
                     Inquire via WhatsApp
                 </a>
-                <p class="contact-footer-note" style="margin-top: 0;">Or <a href="mailto:prajith30v@gmail.com" class="clickable text-accent"
-                        style="text-decoration: none;">Email Me</a> · Response within 24 hours</p>
+                <p class="contact-footer-note" style="margin-top: 0;">Or <a href="mailto:prajith30v@gmail.com"
+                        class="clickable text-accent" style="text-decoration: none;">Email Me</a> · Response within 24
+                    hours</p>
             </div>
         </div>
     </section>
@@ -1395,7 +1534,9 @@
                 </ul>
             </div>
             <div class="footer-links">
-                <h4 style="color: rgba(255,255,255,0.4); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Social & Contact</h4>
+                <h4
+                    style="color: rgba(255,255,255,0.4); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                    Social & Contact</h4>
                 <ul>
                     <li><a href="mailto:prajith30v@gmail.com" class="clickable">Email Request</a></li>
                     <li><a href="https://calendly.com/prajith30v/30min" target="_blank" class="clickable">Calendly
@@ -1403,7 +1544,8 @@
                 </ul>
             </div>
         </div>
-        <div class="copyright" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem;">
+        <div class="copyright"
+            style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem;">
             <span>&copy; 2026 Scionsynth.</span>
             <span style="color: var(--accent);">Built for scale.</span>
         </div>
@@ -1497,15 +1639,15 @@
         const mobileBtn = document.getElementById('mobileMenuBtn');
         const mobileOverlay = document.getElementById('mobileOverlay');
         const mobileLinks = document.querySelectorAll('.mobile-link');
-        
+
         mobileBtn.addEventListener('click', () => {
             mobileOverlay.classList.toggle('active');
             const isActive = mobileOverlay.classList.contains('active');
-            mobileBtn.innerHTML = isActive 
+            mobileBtn.innerHTML = isActive
                 ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>'
                 : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
         });
-        
+
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileOverlay.classList.remove('active');
@@ -1568,12 +1710,6 @@
         window.addEventListener('resize', initNodes);
 
         function animateNodes() {
-            // Pause animation if canvas is completely scrolled out of view to save battery
-            if (window.scrollY > height) {
-                requestAnimationFrame(animateNodes);
-                return;
-            }
-
             ctx.clearRect(0, 0, width, height);
             nodes.forEach(node => {
                 node.update();
@@ -1601,6 +1737,115 @@
             requestAnimationFrame(animateNodes);
         }
         animateNodes();
+
+        // High-Fidelity DNA Particle Animation
+        const dnaCanvas = document.getElementById('dnaCanvas');
+        if (dnaCanvas) {
+            const dnaCtx = dnaCanvas.getContext('2d');
+            let dnaWidth, dnaHeight;
+            let dnaParticles = [];
+            
+            class DNAParticle {
+                constructor(y, phase, isRung) {
+                    this.baseY = y;
+                    this.phase = phase; 
+                    this.isRung = isRung;
+                    this.x = 0;
+                    this.y = y;
+                    this.size = 2;
+                    this.jitterX = (Math.random() - 0.5) * 20;
+                    this.jitterY = (Math.random() - 0.5) * 20;
+                    this.jitterZ = (Math.random() - 0.5) * 20;
+                }
+                
+                update(time, centerX, centerY) {
+                    const rot = time * 0.001 + this.baseY * 0.008; 
+                    const radius = 80; 
+                    const currentPhase = this.phase + rot;
+                    
+                    let rawX = Math.cos(currentPhase) * radius + this.jitterX;
+                    let rawZ = Math.sin(currentPhase) * radius + this.jitterZ;
+                    let rawY = this.baseY + this.jitterY;
+
+                    if (this.isRung) {
+                         const t = this.phase; 
+                         rawX = t * Math.cos(rot) * radius + this.jitterX;
+                         rawZ = t * Math.sin(rot) * radius + this.jitterZ;
+                    }
+
+                    const perspective = 300;
+                    const scale = perspective / (perspective + rawZ + 150);
+                    
+                    let projX = centerX + rawX * scale;
+                    let projY = rawY; 
+                    
+                    // Diagonal tilt (opposite direction)
+                    const tilt = 0.35; // radians (about 20 degrees)
+                    this.x = centerX + (projX - centerX) * Math.cos(tilt) - (projY - centerY) * Math.sin(tilt);
+                    this.y = centerY + (projX - centerX) * Math.sin(tilt) + (projY - centerY) * Math.cos(tilt);
+
+                    this.size = Math.max(0.5, scale * (this.isRung ? 1.5 : 3.5));
+                }
+                
+                draw(ctx) {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    if (this.isRung) {
+                        ctx.fillStyle = `rgba(204, 255, 0, ${Math.min(1, 0.4 * this.size)})`;
+                    } else {
+                        ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, 0.8 * this.size)})`;
+                    }
+                    ctx.fill();
+                }
+            }
+
+            function initDNA() {
+                dnaWidth = dnaCanvas.width = dnaCanvas.offsetWidth;
+                dnaHeight = dnaCanvas.height = dnaCanvas.offsetHeight;
+                dnaParticles = [];
+                
+                for (let y = -300; y < dnaHeight + 300; y += 4) {
+                    for (let i = 0; i < 2; i++) dnaParticles.push(new DNAParticle(y, 0, false));
+                    for (let i = 0; i < 2; i++) dnaParticles.push(new DNAParticle(y, Math.PI, false));
+                }
+                
+                for (let y = -300; y < dnaHeight + 300; y += 40) {
+                    for (let t = -1; t <= 1; t += 0.1) {
+                        for (let i = 0; i < 2; i++) {
+                            let p = new DNAParticle(y, t, true);
+                            p.jitterX = (Math.random() - 0.5) * 8;
+                            p.jitterY = (Math.random() - 0.5) * 8;
+                            p.jitterZ = (Math.random() - 0.5) * 8;
+                            dnaParticles.push(p);
+                        }
+                    }
+                }
+            }
+
+            window.addEventListener('resize', () => {
+                if(window.innerWidth > 992 || dnaParticles.length === 0) initDNA();
+            });
+
+            function animateDNA(time) {
+                dnaCtx.clearRect(0, 0, dnaWidth, dnaHeight);
+                
+                dnaParticles.sort((a, b) => a.size - b.size);
+                
+                const centerX = dnaWidth / 2;
+                const centerY = dnaHeight / 2;
+                dnaParticles.forEach(p => {
+                    p.update(time, centerX, centerY);
+                    p.draw(dnaCtx);
+                });
+                
+                requestAnimationFrame(animateDNA);
+            }
+            
+            setTimeout(() => {
+                initDNA();
+                requestAnimationFrame(animateDNA);
+            }, 100);
+        }
     </script>
 </body>
 
