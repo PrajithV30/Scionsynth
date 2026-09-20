@@ -4,25 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scionsynth | AI Automation Specialist</title>
+    <title>Scionsynth | Full-Stack Tech Ecosystems for Physical & Modern Brands</title>
+    <meta name="description"
+        content="Scionsynth sets up and maintains unified tech ecosystems for physical and legacy businesses—Web Development, 3D Real Estate Environments, Hyperlocal SEO, Email & WhatsApp Automation, and B2B Lead Intelligence.">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap');
-        @import url('https://api.fontshare.com/v2/css?f[]=clash-display@600,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+        @import url('https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap');
 
         /* CSS Custom Properties */
         :root {
             --bg-color: #050505;
-            --surface: #111111;
-            --surface-light: #181818;
+            --surface: #0e0e0e;
+            --surface-light: #161616;
+            --surface-card: #121212;
+            --surface-border: rgba(255, 255, 255, 0.08);
+            --surface-hover: rgba(204, 255, 0, 0.03);
             --text-main: #ffffff;
-            --text-muted: #8e8e8e;
+            --text-muted: #9a9a9a;
             --text-dark: #000000;
             --accent: #ccff00;
             --accent-dark: #b3e600;
-            --accent-glow: rgba(204, 255, 0, 0.25);
+            --accent-glow: rgba(204, 255, 0, 0.28);
+            --accent-glow-subtle: rgba(204, 255, 0, 0.08);
+            --accent-cyan: #00f0ff;
+            --accent-green: #25d366;
             --font-display: 'Syne', sans-serif;
             --font-body: 'Outfit', sans-serif;
             --font-accent: 'Clash Display', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
             --ease-main: cubic-bezier(0.16, 1, 0.3, 1);
             --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
         }
@@ -51,58 +60,57 @@
         /* Ambient Glow Background */
         .ambient-glow {
             position: fixed;
-            width: 60vw;
-            height: 60vw;
+            width: 55vw;
+            height: 55vw;
             border-radius: 50%;
-            background: rgba(204, 255, 0, 0.08);
-            /* Faint neon green */
+            background: radial-gradient(circle, rgba(204, 255, 0, 0.07) 0%, rgba(0, 240, 255, 0.03) 50%, transparent 70%);
             filter: blur(140px);
             z-index: -3;
-            /* Behind grid and everything else */
             pointer-events: none;
-            animation: glowPulse 12s infinite alternate ease-in-out;
+            animation: glowPulse 16s infinite alternate ease-in-out;
         }
 
         .ambient-glow-1 {
-            top: -20vh;
+            top: -15vh;
             left: -10vw;
         }
 
         .ambient-glow-2 {
             bottom: -20vh;
             right: -10vw;
-            animation-delay: -6s;
-            background: rgba(204, 255, 0, 0.05);
+            animation-delay: -8s;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.06) 0%, rgba(204, 255, 0, 0.04) 50%, transparent 70%);
         }
 
         @keyframes glowPulse {
             0% {
-                transform: scale(0.8) translate(0%, 0%);
+                transform: scale(0.85) translate(0%, 0%);
                 opacity: 0.4;
             }
 
             50% {
-                transform: scale(1.1) translate(5%, 5%);
-                opacity: 0.8;
+                transform: scale(1.15) translate(4%, 4%);
+                opacity: 0.75;
             }
 
             100% {
-                transform: scale(0.9) translate(-5%, -5%);
+                transform: scale(0.95) translate(-4%, -4%);
                 opacity: 0.5;
             }
         }
 
-        /* Noise Overlay & Cursor */
+        /* Noise Overlay */
         .noise-overlay {
             position: fixed;
             inset: 0;
             pointer-events: none;
             z-index: 9998;
-            opacity: 0.04;
+            opacity: 0.035;
             mix-blend-mode: overlay;
             background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
+        /* Custom Interactive Cursor */
         .cursor-dot {
             position: fixed;
             width: 8px;
@@ -112,35 +120,36 @@
             pointer-events: none;
             z-index: 10000;
             transform: translate(-50%, -50%);
-            transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out);
-            box-shadow: 0 0 10px var(--accent-glow);
+            transition: width 0.25s var(--ease-out), height 0.25s var(--ease-out), background-color 0.25s;
+            box-shadow: 0 0 12px var(--accent-glow);
         }
 
         .cursor-ring {
             position: fixed;
-            width: 44px;
-            height: 44px;
+            width: 42px;
+            height: 42px;
             border: 1px solid var(--accent);
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
-            opacity: 0.5;
+            transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out), border-color 0.3s var(--ease-out), opacity 0.3s;
+            opacity: 0.4;
         }
 
         body.hovering .cursor-dot {
-            width: 60px;
-            height: 60px;
+            width: 52px;
+            height: 52px;
             background: var(--accent);
             mix-blend-mode: exclusion;
             box-shadow: none;
         }
 
         body.hovering .cursor-ring {
-            width: 80px;
-            height: 80px;
+            width: 72px;
+            height: 72px;
             border-color: transparent;
+            opacity: 0;
         }
 
         /* Loader Intro */
@@ -150,8 +159,10 @@
             background: var(--bg-color);
             z-index: 100000;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            gap: 1rem;
             transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.4s;
             transform-origin: top;
         }
@@ -164,43 +175,31 @@
 
         .loader-text {
             font-family: var(--font-accent);
-            font-size: 5rem;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
             font-weight: 700;
             color: var(--accent);
-            position: relative;
-            text-shadow: 0 0 40px var(--accent-glow);
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            text-shadow: 0 0 35px var(--accent-glow);
+            letter-spacing: 0.05em;
         }
 
-        .loader-text span {
-            display: inline-block;
-            transform: translateY(100%);
-            animation: slideUpFade 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes slideUpFade {
-            0% {
-                transform: translateY(100%) scale(0.9);
-                opacity: 0;
-                filter: blur(10px);
-            }
-
-            100% {
-                transform: translateY(0) scale(1);
-                opacity: 1;
-                filter: blur(0);
-            }
+        .loader-sub {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
         }
 
         /* Typography */
         h1,
         h2,
         h3,
-        h4 {
+        h4,
+        h5 {
             font-family: var(--font-display);
             font-weight: 700;
-            line-height: 1.1;
-            letter-spacing: -0.01em;
+            line-height: 1.12;
+            letter-spacing: -0.015em;
         }
 
         p,
@@ -208,20 +207,23 @@
         li,
         span,
         td,
-        th {
+        th,
+        button,
+        input,
+        select {
             font-family: var(--font-body);
             font-weight: 400;
         }
 
         .text-display {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            line-height: 1.15;
+            font-size: clamp(2.4rem, 5.2vw, 4.4rem);
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.1;
         }
 
         .text-heading {
-            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-size: clamp(2rem, 3.8vw, 3.2rem);
             font-weight: 700;
         }
 
@@ -231,22 +233,67 @@
 
         .text-accent {
             color: var(--accent);
-            text-shadow: 0 0 20px var(--accent-glow);
+            text-shadow: 0 0 24px var(--accent-glow);
             font-family: var(--font-accent);
             font-weight: 700;
-            letter-spacing: 0.02em;
-            font-style: normal;
+        }
+
+        .text-mono {
+            font-family: var(--font-mono);
+        }
+
+        .badge-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.9rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            background: rgba(204, 255, 0, 0.08);
+            border: 1px solid rgba(204, 255, 0, 0.25);
+            color: var(--accent);
+            width: fit-content;
+        }
+
+        .badge-tag.blue {
+            background: rgba(0, 240, 255, 0.08);
+            border-color: rgba(0, 240, 255, 0.25);
+            color: var(--accent-cyan);
+        }
+
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px var(--accent);
+            animation: pulse-dot-anim 1.8s infinite;
+        }
+
+        @keyframes pulse-dot-anim {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.4;
+            }
         }
 
         /* Layout */
         .container {
-            max-width: 1200px;
+            max-width: 1240px;
             margin: 0 auto;
             padding: 0 5%;
         }
 
         section {
-            padding: 8rem 0;
+            padding: 7.5rem 0;
             position: relative;
         }
 
@@ -254,70 +301,86 @@
             position: absolute;
             inset: 0;
             z-index: -2;
-            opacity: 0.3;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
-            animation: gridScroll 40s linear infinite;
-        }
-
-        /* Global Utils & Glassmorphism */
-        .glass-panel {
-            background: rgba(17, 17, 17, 0.4);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border-radius: 16px;
+            opacity: 0.25;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridScroll 50s linear infinite;
         }
 
         @keyframes gridScroll {
             0% {
                 background-position: 0 0;
             }
-
             100% {
-                background-position: 60px 60px;
+                background-position: 50px 50px;
             }
         }
 
-        /* Navbar (Sleek Pill) */
+        /* Glassmorphic Panels */
+        .glass-panel {
+            background: rgba(14, 14, 14, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--surface-border);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border-radius: 16px;
+        }
+
+        /* Navbar */
         nav {
             position: fixed;
-            top: 1.5rem;
+            top: 1.2rem;
             left: 50%;
-            width: 95%;
-            max-width: 1000px;
+            width: 94%;
+            max-width: 1100px;
             transform: translateX(-50%);
-            padding: 0.8rem 1.2rem;
+            padding: 0.75rem 1.4rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            transition: all 0.5s var(--ease-main);
+            transition: all 0.4s var(--ease-main);
             border-radius: 100px;
-            background: rgba(5, 5, 5, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid transparent;
+            background: rgba(8, 8, 8, 0.65);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
         }
 
         nav.scrolled {
-            background: rgba(10, 10, 10, 0.75);
+            background: rgba(10, 10, 10, 0.88);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(204, 255, 0, 0.05);
-            padding: 0.6rem 1.2rem;
+            border: 1px solid rgba(204, 255, 0, 0.15);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(204, 255, 0, 0.06);
+            padding: 0.6rem 1.4rem;
         }
 
         .logo {
             font-family: var(--font-display);
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             font-weight: 800;
             color: var(--text-main);
             text-decoration: none;
             letter-spacing: -0.02em;
-            padding-left: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-symbol {
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 900;
+            color: #000;
+            box-shadow: 0 0 10px var(--accent-glow);
         }
 
         .logo span {
@@ -326,21 +389,21 @@
 
         .nav-links {
             display: flex;
-            gap: 2rem;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 0.5rem 1.5rem;
+            gap: 1.8rem;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 0.45rem 1.4rem;
             border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         .nav-links a {
-            font-size: 0.85rem;
-            font-weight: 500;
+            font-size: 0.82rem;
+            font-weight: 600;
             text-transform: uppercase;
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             transition: color 0.3s var(--ease-out);
-            letter-spacing: 0.05em;
+            letter-spacing: 0.06em;
         }
 
         .nav-links a:hover {
@@ -352,114 +415,82 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 0.6rem;
             padding: 0.9rem 2.2rem;
-            background: linear-gradient(90deg, var(--accent), #39ff14);
+            background: linear-gradient(90deg, var(--accent), #76ff03);
             color: var(--text-dark);
             border: none;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             text-decoration: none;
             position: relative;
             overflow: hidden;
-            transition: all 0.4s var(--ease-out);
+            transition: all 0.35s var(--ease-out);
             border-radius: 8px;
-            box-shadow: 0 0 25px rgba(204, 255, 0, 0.6), 0 0 45px rgba(57, 255, 20, 0.4);
+            box-shadow: 0 0 25px rgba(204, 255, 0, 0.5), 0 0 45px rgba(118, 255, 3, 0.3);
         }
 
         .btn::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
             transform: translateX(-100%);
             transition: transform 0.6s var(--ease-main);
         }
 
         .btn:hover {
-            background: linear-gradient(90deg, #dfff33, #5cff3b);
-            box-shadow: 0 0 40px rgba(204, 255, 0, 0.8), 0 0 70px rgba(57, 255, 20, 0.6);
-            transform: translateY(-3px) scale(1.02);
+            background: linear-gradient(90deg, #dfff33, #99ff33);
+            box-shadow: 0 0 35px rgba(204, 255, 0, 0.8), 0 0 65px rgba(118, 255, 3, 0.5);
+            transform: translateY(-2px) scale(1.02);
         }
 
         .btn:hover::after {
             transform: translateX(100%);
         }
 
-        .btn-pulse {
-            animation: pulse-glow 2s infinite;
-        }
-
-        @keyframes pulse-glow {
-            0% {
-                box-shadow: 0 0 25px rgba(204, 255, 0, 0.6), 0 0 45px rgba(57, 255, 20, 0.4);
-                transform: scale(1);
-            }
-
-            50% {
-                box-shadow: 0 0 40px rgba(204, 255, 0, 0.9), 0 0 80px rgba(57, 255, 20, 0.7);
-                transform: scale(1.02);
-            }
-
-            100% {
-                box-shadow: 0 0 25px rgba(204, 255, 0, 0.6), 0 0 45px rgba(57, 255, 20, 0.4);
-                transform: scale(1);
-            }
-        }
-
         .btn-outline {
-            background: transparent;
+            background: rgba(255, 255, 255, 0.03);
             color: var(--text-main);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             box-shadow: none;
         }
 
         .btn-outline:hover {
-            border-color: var(--text-main);
-            background: transparent;
-            color: var(--text-main);
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(204, 255, 0, 0.05);
+            box-shadow: 0 0 20px rgba(204, 255, 0, 0.2);
             transform: translateY(-2px);
         }
 
-        /* Nav specific button */
         .btn-nav {
-            padding: 0.7rem 1.4rem;
-            font-size: 0.85rem;
+            padding: 0.65rem 1.4rem;
+            font-size: 0.82rem;
             border-radius: 50px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
-        .btn-nav svg {
-            transition: transform 0.3s var(--ease-out);
-        }
-
-        .btn-nav:hover svg {
-            transform: translate(2px, -2px);
-        }
-
-        /* Mobile Menu */
         .mobile-menu-btn {
             display: none;
             background: transparent;
             border: none;
             color: var(--text-main);
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             z-index: 1001;
         }
 
         .mobile-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(5, 5, 5, 0.95);
-            backdrop-filter: blur(20px);
+            background: rgba(5, 5, 5, 0.97);
+            backdrop-filter: blur(25px);
             z-index: 999;
             display: flex;
             flex-direction: column;
@@ -468,7 +499,7 @@
             gap: 2rem;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.4s var(--ease-main);
+            transition: opacity 0.35s var(--ease-main);
         }
 
         .mobile-overlay.active {
@@ -477,71 +508,23 @@
         }
 
         .mobile-overlay a {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-family: var(--font-display);
             font-weight: 700;
             color: var(--text-main);
             text-decoration: none;
             text-transform: uppercase;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.4s var(--ease-out);
         }
 
-        .mobile-overlay.active a {
-            transform: translateY(0);
-            opacity: 1;
+        .mobile-overlay a:hover {
+            color: var(--accent);
         }
 
-        .mobile-overlay a:nth-child(1) {
-            transition-delay: 0.1s;
-        }
-
-        .mobile-overlay a:nth-child(2) {
-            transition-delay: 0.15s;
-        }
-
-        .mobile-overlay a:nth-child(3) {
-            transition-delay: 0.2s;
-        }
-
-        .mobile-overlay a:nth-child(4) {
-            transition-delay: 0.25s;
-        }
-
-        /* Floating Nav Button */
-        .floating-cta {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 998;
-            display: none;
-            border-radius: 50px;
-        }
-
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: flex;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            nav .btn-nav {
-                display: none;
-            }
-
-            .floating-cta {
-                display: inline-flex;
-            }
-        }
-
-        /* Reveal Utils (Staggered) */
+        /* Reveal Animations */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+            transform: translateY(28px);
+            transition: opacity 0.75s var(--ease-out), transform 0.75s var(--ease-out);
         }
 
         .reveal.active {
@@ -549,26 +532,20 @@
             transform: translateY(0);
         }
 
-        .delay-1 {
-            transition-delay: 0.1s;
-        }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
 
-        .delay-2 {
-            transition-delay: 0.2s;
-        }
-
-        .delay-3 {
-            transition-delay: 0.3s;
-        }
-
-        /* Hero */
+        /* Hero Section */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            text-align: left;
-            overflow: hidden;
             position: relative;
+            overflow: hidden;
+            padding-top: 8rem;
+            padding-bottom: 5rem;
         }
 
         canvas#nodeGraph {
@@ -577,19 +554,8 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.4;
+            opacity: 0.35;
             pointer-events: none;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 1.5s var(--ease-main) 0.5s;
-            max-width: 700px;
-            padding-top: 12rem;
         }
 
         canvas#dnaCanvas {
@@ -599,531 +565,798 @@
             width: 50%;
             height: 100%;
             z-index: 0;
+            opacity: 0.9;
             pointer-events: none;
         }
 
-        body.loaded .hero-content {
-            transform: translateY(0);
-            opacity: 1;
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 780px;
         }
 
-        .hero-gradient-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, var(--bg-color) 5%, transparent 40%);
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .hero .hero-badge {
-            display: inline-flex;
+        .hero-badge-container {
+            display: flex;
+            gap: 0.8rem;
             align-items: center;
-            gap: 0.6rem;
-            padding: 0.4rem 1.2rem;
-            background: rgba(255, 255, 255, 0.03);
-            color: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 50px;
-            font-weight: 500;
-            font-size: 0.85rem;
-            letter-spacing: 0.02em;
-            margin-bottom: 2rem;
-            backdrop-filter: blur(10px);
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
         }
 
-        .pulse-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--accent);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent);
-            animation: pulse-dot-anim 2s infinite;
-        }
-
-        @keyframes pulse-dot-anim {
-            0% {
-                opacity: 1;
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 0.4;
-                transform: scale(0.8);
-            }
-
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .hero .subline {
-            font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+        .hero-subline {
+            font-size: clamp(1.05rem, 1.8vw, 1.25rem);
             color: var(--text-muted);
-            max-width: 600px;
-            margin: 2rem 0 3rem;
-            font-weight: 400;
-            line-height: 1.7;
+            margin: 1.8rem 0 2.5rem;
+            line-height: 1.65;
+            max-width: 660px;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 1.5rem;
-            align-items: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
         }
 
-        /* Custom Reference Layout: Deployment Grid */
-        .steps-container {
+        /* Trust Stats Strip */
+        .stats-ticker {
             margin-top: 4rem;
-            position: relative;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            padding: 1.5rem 2rem;
+            background: rgba(18, 18, 18, 0.6);
+            border: 1px solid var(--surface-border);
+            border-radius: 14px;
+            backdrop-filter: blur(12px);
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .stat-val {
+            font-family: var(--font-accent);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: flex;
+            align-items: baseline;
+            gap: 0.2rem;
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        /* Pillars / Manifesto Section */
+        .manifesto-section {
+            background: linear-gradient(180deg, transparent, rgba(204, 255, 0, 0.02) 50%, transparent);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .pillar-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            align-items: stretch;
+            gap: 1.8rem;
+            margin-top: 3.5rem;
         }
 
-        .step-card {
-            background: rgba(17, 17, 17, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            padding: 3rem 2.5rem;
-            border-radius: 20px;
+        .pillar-card {
+            background: var(--surface-card);
+            border: 1px solid var(--surface-border);
+            border-radius: 16px;
+            padding: 2.2rem;
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(8px);
-            transition: all 0.5s var(--ease-out);
-            display: flex;
-            flex-direction: column;
+            transition: all 0.35s var(--ease-out);
         }
 
-        .step-card:hover {
-            border-color: rgba(204, 255, 0, 0.2);
-            transform: translateY(-4px);
-            background: rgba(17, 17, 17, 0.5);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .step-num {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: var(--accent);
-            margin-bottom: 1rem;
-            opacity: 0.8;
-            font-family: var(--font-display);
-        }
-
-        .step-card h3 {
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
-            color: var(--text-main);
-            letter-spacing: -0.01em;
-        }
-
-        .step-card p {
-            font-size: 1rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        .step-card.highlight {
-            background: rgba(204, 255, 0, 0.03);
-            border-color: rgba(204, 255, 0, 0.15);
-        }
-
-        .step-card.highlight:hover {
+        .pillar-card:hover {
             border-color: rgba(204, 255, 0, 0.3);
-            background: rgba(204, 255, 0, 0.05);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(204, 255, 0, 0.06);
         }
 
-        .step-card.highlight .btn-learn {
-            margin-top: auto;
-            display: inline-flex;
-            align-items: center;
-            color: var(--accent);
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-decoration: none;
-            padding-top: 2rem;
-        }
-
-        .step-card.highlight .btn-learn span {
-            margin-left: 0.5rem;
-            transition: transform 0.3s;
-        }
-
-        .step-card.highlight:hover .btn-learn span {
-            transform: translateX(5px);
-        }
-
-        /* Services / Capabilities (Bento Grid) */
-        .services-section {
-            background: transparent;
-            position: relative;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-top: 3rem;
-        }
-
-        .service-card {
-            background: rgba(17, 17, 17, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 3rem 2.5rem;
-            border-radius: 20px;
-            transition: all 0.4s var(--ease-out);
-            backdrop-filter: blur(12px);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            min-height: 280px;
-        }
-
-        .service-card::before {
+        .pillar-card::before {
             content: '';
             position: absolute;
-            inset: 0;
-            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(204, 255, 0, 0.08), transparent 40%);
-            z-index: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), transparent);
             opacity: 0;
-            transition: opacity 0.5s;
+            transition: opacity 0.3s;
         }
 
-        .service-card:hover::before {
+        .pillar-card:hover::before {
             opacity: 1;
         }
 
-        @media (min-width: 768px) {
-            .service-card:nth-child(1) {
-                grid-column: span 2;
-            }
-
-            .service-card:nth-child(2) {
-                grid-column: span 1;
-            }
-
-            .service-card:nth-child(3) {
-                grid-column: span 1;
-            }
-
-            .service-card:nth-child(4) {
-                grid-column: span 2;
-            }
+        .pillar-icon {
+            font-size: 2rem;
+            margin-bottom: 1.2rem;
+            display: inline-block;
         }
 
-        @media (max-width: 767px) {
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .service-icon,
-        .service-card h3,
-        .service-card p {
-            position: relative;
-            z-index: 1;
-        }
-
-        .service-card:hover {
-            border-color: rgba(204, 255, 0, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .service-icon {
-            font-size: 2.5rem;
-            margin-bottom: auto;
-            padding-bottom: 2rem;
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            color: var(--text-main);
+        .pillar-card h3 {
+            font-size: 1.3rem;
             margin-bottom: 0.8rem;
+            color: var(--text-main);
         }
 
-        .service-card p {
+        .pillar-card p {
             color: var(--text-muted);
-            font-size: 1rem;
+            font-size: 0.95rem;
             line-height: 1.6;
         }
 
-        /* Pricing horizontally with tilt */
-        .pricing-section {
-            background: transparent;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
+        /* Services Grid (Main Reframing) */
+        .services-section {
+            position: relative;
         }
 
-        .cards-wrapper {
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-header h2 {
+            margin-top: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .services-grid-main {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .service-box {
+            background: var(--surface-card);
+            border: 1px solid var(--surface-border);
+            border-radius: 18px;
+            padding: 2.5rem;
+            position: relative;
             display: flex;
-            gap: 2.5rem;
-            margin-top: 4rem;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.4s var(--ease-out);
+            overflow: hidden;
+        }
+
+        .service-box:hover {
+            border-color: rgba(204, 255, 0, 0.4);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 30px rgba(204, 255, 0, 0.08);
+            transform: translateY(-4px);
+        }
+
+        .service-box-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-box-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            background: rgba(204, 255, 0, 0.08);
+            border: 1px solid rgba(204, 255, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: var(--accent);
+        }
+
+        .service-box h3 {
+            font-size: 1.55rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-main);
+        }
+
+        .service-box p.service-desc {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            line-height: 1.65;
+            margin-bottom: 1.8rem;
+        }
+
+        /* Tool Tags & Badges */
+        .tools-label {
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            margin-bottom: 0.6rem;
+        }
+
+        .tools-pill-grid {
+            display: flex;
             flex-wrap: wrap;
-            perspective: 1500px;
+            gap: 0.6rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .tool-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: #dcdcdc;
+            transition: all 0.25s;
+        }
+
+        .tool-pill:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(204, 255, 0, 0.05);
+        }
+
+        .tool-pill .tool-badge-note {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Service Metrics & Economics Widget */
+        .service-economics {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-top: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .econ-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .econ-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+
+        .econ-val {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .econ-val.highlight {
+            color: var(--accent);
+        }
+
+        /* 3D Real Estate Interactive Showcase Demo */
+        .interactive-3d-box {
+            grid-column: span 2;
+            background: radial-gradient(circle at 80% 20%, rgba(204, 255, 0, 0.06), var(--surface-card) 60%);
+            border: 1px solid rgba(204, 255, 0, 0.3);
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .canvas-3d-container {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            background: #080808;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
             justify-content: center;
         }
 
-        .price-card {
-            flex: 1;
-            min-width: 320px;
-            max-width: 400px;
-            padding: 3.5rem 2.5rem;
-            background: rgba(17, 17, 17, 0.3);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.03);
+        canvas#buildingCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .canvas-overlay-ui {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            display: flex;
+            gap: 6px;
+            z-index: 2;
+        }
+
+        .canvas-tag {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(204, 255, 0, 0.3);
+            color: var(--accent);
+            font-size: 0.7rem;
+            font-family: var(--font-mono);
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            backdrop-filter: blur(8px);
+        }
+
+        .canvas-controls-hint {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            font-family: var(--font-mono);
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+        }
+
+        /* Ecosystem Roadmap / Journey */
+        .roadmap-section {
+            background: #090909;
+            border-top: 1px solid var(--surface-border);
+            border-bottom: 1px solid var(--surface-border);
+        }
+
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 3.5rem;
             position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.1s linear, box-shadow 0.6s var(--ease-out), border-color 0.6s var(--ease-out);
-            border-radius: 24px;
+        }
+
+        .roadmap-card {
+            background: var(--surface-card);
+            border: 1px solid var(--surface-border);
+            border-radius: 14px;
+            padding: 2rem 1.5rem;
+            position: relative;
             display: flex;
             flex-direction: column;
+            gap: 0.8rem;
+            transition: all 0.3s;
         }
 
-        .price-card:hover {
-            border-color: rgba(204, 255, 0, 0.3);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 30px rgba(204, 255, 0, 0.05);
-            background: rgba(17, 17, 17, 0.5);
+        .roadmap-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
         }
 
-        .popular-badge {
+        .step-index {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent);
+            background: rgba(204, 255, 0, 0.08);
+            width: fit-content;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+        }
+
+        .roadmap-card h4 {
+            font-size: 1.15rem;
+            color: var(--text-main);
+        }
+
+        .roadmap-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+        }
+
+        /* Interactive ROI & Revenue Calculator */
+        .calculator-section {
+            position: relative;
+        }
+
+        .calc-wrapper {
+            background: var(--surface-card);
+            border: 1px solid rgba(204, 255, 0, 0.25);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(204, 255, 0, 0.05);
+            border-radius: 20px;
+            padding: 3rem;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 3rem;
+        }
+
+        .calc-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .form-label {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .calc-select, .calc-slider {
+            width: 100%;
+            background: #181818;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.25s;
+        }
+
+        .calc-select:focus {
+            border-color: var(--accent);
+        }
+
+        .services-check-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.7rem;
+        }
+
+        .service-checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 0.65rem 0.9rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .service-checkbox-label:hover {
+            border-color: rgba(204, 255, 0, 0.4);
+            color: #fff;
+        }
+
+        .service-checkbox-label input {
+            accent-color: var(--accent);
+        }
+
+        .calc-result-box {
+            background: #080808;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 2.2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calc-result-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(204, 255, 0, 0.12), transparent 70%);
+            pointer-events: none;
+        }
+
+        .calc-metric-row {
+            margin-bottom: 1.5rem;
+        }
+
+        .calc-metric-title {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 0.3rem;
+        }
+
+        .calc-metric-number {
+            font-family: var(--font-accent);
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .calc-metric-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Pricing & Retainer Packages */
+        .pricing-section {
+            position: relative;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3.5rem;
+        }
+
+        .pricing-card {
+            background: var(--surface-card);
+            border: 1px solid var(--surface-border);
+            border-radius: 18px;
+            padding: 2.8rem 2.2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: all 0.35s var(--ease-out);
+        }
+
+        .pricing-card:hover {
+            border-color: rgba(204, 255, 0, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--accent);
+            background: linear-gradient(180deg, rgba(204, 255, 0, 0.03) 0%, var(--surface-card) 40%);
+            box-shadow: 0 20px 50px rgba(204, 255, 0, 0.08), 0 0 30px rgba(204, 255, 0, 0.05);
+        }
+
+        .featured-badge {
             position: absolute;
             top: -14px;
             left: 50%;
             transform: translateX(-50%);
             background: var(--accent);
-            color: var(--text-dark);
-            padding: 0.5rem 1.5rem;
-            font-family: var(--font-body);
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px var(--accent-glow);
+            color: #000;
+            font-size: 0.72rem;
+            font-weight: 800;
             text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0.35rem 1rem;
+            border-radius: 50px;
+            box-shadow: 0 0 15px var(--accent-glow);
         }
 
-        .price-name {
-            font-size: 2rem;
-            color: var(--text-main);
+        .package-name {
+            font-size: 1.5rem;
             margin-bottom: 0.5rem;
-            transform: translateZ(30px);
         }
 
-        .price-cost {
-            font-size: 2.5rem;
-            font-family: var(--font-display);
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 1rem;
-            transform: translateZ(40px);
-        }
-
-        .price-tag {
-            font-size: 0.95rem;
+        .package-subtitle {
+            font-size: 0.88rem;
             color: var(--text-muted);
-            margin-bottom: 2.5rem;
-            padding-bottom: 2.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transform: translateZ(20px);
+            margin-bottom: 1.5rem;
         }
 
-        .price-features {
-            list-style: none;
-            transform: translateZ(25px);
-            flex-grow: 1;
-        }
-
-        .price-features li {
+        .package-price-wrap {
             display: flex;
-            gap: 1rem;
-            font-size: 0.95rem;
-            color: var(--text-main);
-            margin-bottom: 1.2rem;
-            align-items: flex-start;
+            align-items: baseline;
+            gap: 0.4rem;
+            margin-bottom: 1.8rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        .price-features li::before {
-            content: '✓';
+        .price-currency {
+            font-family: var(--font-accent);
+            font-size: 1.4rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .price-val {
+            font-family: var(--font-accent);
+            font-size: 2.6rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+
+        .price-cadence {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .feature-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .feature-item {
+            font-size: 0.92rem;
+            color: #d2d2d2;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.65rem;
+            line-height: 1.5;
+        }
+
+        .feature-check {
             color: var(--accent);
             font-weight: 800;
             font-size: 1.1rem;
-        }
-
-        .retainer-note {
-            text-align: center;
-            margin-top: 5rem;
-            font-size: 1.05rem;
-            color: var(--text-muted);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.02);
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            line-height: 1;
+            flex-shrink: 0;
+            margin-top: 2px;
         }
 
         /* Comparison Table */
-        .comparison-table-wrapper {
-            margin-top: 8rem;
-            overflow-x: auto;
-            background: var(--surface);
+        .comparison-table-wrap {
+            margin-top: 4.5rem;
+            background: var(--surface-card);
+            border: 1px solid var(--surface-border);
             border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 2rem;
+            overflow: hidden;
         }
 
-        .table {
+        .comp-table {
             width: 100%;
-            min-width: 900px;
             border-collapse: collapse;
             text-align: left;
         }
 
-        .table th,
-        .table td {
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        .comp-table th, .comp-table td {
+            padding: 1.2rem 1.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .table th {
+        .comp-table th {
             font-family: var(--font-display);
-            font-size: 1.3rem;
-            font-weight: 600;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            background: #090909;
             color: var(--text-main);
         }
 
-        .table .feature-col {
-            font-weight: 500;
-            color: var(--text-main);
-            width: 25%;
-            font-size: 1.05rem;
-        }
-
-        .table td {
-            font-size: 1rem;
+        .comp-table td {
+            font-size: 0.92rem;
             color: var(--text-muted);
         }
 
-        .table tbody tr {
-            transition: background 0.3s var(--ease-out);
-        }
-
-        .table tbody tr:hover td {
+        .comp-table tr:hover td {
             background: rgba(255, 255, 255, 0.02);
-            color: var(--text-main);
+            color: #fff;
         }
 
-        /* Narrative */
-        .narrative-block {
+        .comp-table td.brand-col {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Conviction & Founder Note */
+        .conviction-block {
             text-align: center;
-            max-width: 900px;
+            max-width: 920px;
             margin: 0 auto;
             position: relative;
         }
 
-        .narrative-block::before {
-            content: '"';
+        .conviction-block::before {
+            content: '“';
             position: absolute;
-            top: -60px;
+            top: -70px;
             left: 50%;
             transform: translateX(-50%);
             font-family: var(--font-display);
             font-size: 8rem;
-            color: rgba(204, 255, 0, 0.1);
+            color: rgba(204, 255, 0, 0.08);
             line-height: 1;
+            pointer-events: none;
         }
 
-        .narrative-block p {
-            font-size: clamp(1.1rem, 2vw, 1.6rem);
-            line-height: 1.6;
+        .conviction-block p {
+            font-size: clamp(1.15rem, 2vw, 1.55rem);
+            line-height: 1.65;
             color: var(--text-muted);
             margin-bottom: 2rem;
         }
 
-        .narrative-block p strong {
+        .conviction-block p strong {
             color: var(--text-main);
-            font-weight: 500;
-        }
-
-        .narrative-highlight {
-            color: var(--accent) !important;
             font-weight: 600;
         }
 
-        /* CTA & Contact */
+        .conviction-highlight {
+            color: var(--accent) !important;
+            font-weight: 700;
+        }
+
+        /* Contact & Consultation Section */
         .contact-section {
-            background: transparent;
-            padding: 10rem 0;
+            padding: 8rem 0 6rem;
             text-align: center;
             position: relative;
-            overflow: hidden;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
-        }
-
-        .contact-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            width: 100vw;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            transform: translateX(-50%);
-            opacity: 0.3;
-        }
-
-        .contact-section h2 {
-            margin-bottom: 1.5rem;
-            color: var(--text-main);
-        }
-
-        .contact-section p {
-            max-width: 600px;
-            margin: 0 auto 4rem;
-            color: var(--text-muted);
-            font-size: 1.1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         .calendly-wrapper {
             max-width: 1000px;
-            margin: 0 auto;
-            height: 750px;
+            margin: 3.5rem auto;
+            height: 720px;
             background: var(--bg-color);
-            border-radius: 16px;
+            border-radius: 18px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
         }
 
-        .contact-footer-note {
-            margin-top: 3rem;
+        .wa-contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 1.1rem 2.8rem;
+            background: rgba(37, 211, 102, 0.06);
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            border-radius: 100px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
             font-size: 1.05rem;
-            color: var(--text-muted);
+            transition: all 0.35s var(--ease-out);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .wa-contact-btn:hover {
+            border-color: #25d366;
+            background: rgba(37, 211, 102, 0.15);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.25);
+            transform: translateY(-2px);
         }
 
         /* Footer */
         footer {
-            padding: 6rem 5% 3rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
-            background: transparent;
+            padding: 5rem 5% 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            background: #040404;
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 4rem;
-            margin-bottom: 5rem;
-            max-width: 1200px;
+            grid-template-columns: 2fr 1fr 1fr 1.2fr;
+            gap: 3.5rem;
+            margin-bottom: 4.5rem;
+            max-width: 1240px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .footer-brand h3 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
             color: var(--text-main);
         }
 
@@ -1133,95 +1366,122 @@
 
         .footer-brand p {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            max-width: 320px;
         }
 
         .footer-links h4 {
             font-family: var(--font-display);
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1.2rem;
             color: var(--text-main);
         }
 
         .footer-links ul {
             list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
         }
 
         .footer-links a {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s var(--ease-out);
+            font-size: 0.9rem;
+            transition: color 0.25s;
         }
 
         .footer-links a:hover {
             color: var(--accent);
         }
 
-        .copyright {
+        .copyright-bar {
             text-align: center;
-            color: rgba(255, 255, 255, 0.2);
-            font-size: 0.85rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
-            padding-top: 3rem;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.82rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1240px;
+            margin: 0 auto;
         }
 
-        @media (max-width: 992px) {
-            .hero-content {
-                margin-left: 0;
-                max-width: 100%;
+        /* Floating CTA */
+        .floating-cta {
+            position: fixed;
+            bottom: 1.8rem;
+            right: 1.8rem;
+            z-index: 998;
+            border-radius: 50px;
+            display: none;
+            padding: 0.8rem 1.6rem;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            .services-grid-main {
+                grid-template-columns: 1fr;
+            }
+            .interactive-3d-box {
+                grid-column: span 1;
+                grid-template-columns: 1fr;
+            }
+            .pillar-grid {
+                grid-template-columns: 1fr;
+            }
+            .roadmap-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .calc-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-ticker {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
             }
             canvas#dnaCanvas {
                 width: 100%;
-                opacity: 0.2;
-                pointer-events: none;
+                opacity: 0.25;
             }
-            .cards-wrapper {
-                flex-direction: column;
-            }
+        }
 
-            .price-card {
-                width: 100%;
-                max-width: 100%;
-                transform: none !important;
+        @media (max-width: 768px) {
+            .nav-links, nav .btn-nav {
+                display: none;
             }
-
-            .steps-container {
+            .mobile-menu-btn {
+                display: flex;
+            }
+            .floating-cta {
+                display: inline-flex;
+            }
+            .roadmap-grid {
                 grid-template-columns: 1fr;
-                gap: 2rem;
             }
-
-            .step-card.highlight {
-                transform: none;
+            .stats-ticker {
+                grid-template-columns: 1fr;
             }
-
-            .step-card.highlight:hover {
-                transform: translateY(-5px);
+            .services-check-grid {
+                grid-template-columns: 1fr;
             }
-
-            .table th,
-            .table td {
-                padding: 1rem;
+            .footer-grid {
+                grid-template-columns: 1fr;
             }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .hero-buttons .btn {
-                width: 100%;
-                text-align: center;
-            }
-
-            .ambient-glow {
-                width: 150vw;
-                height: 150vw;
+            .comp-table th, .comp-table td {
+                padding: 0.9rem 1rem;
+                font-size: 0.82rem;
             }
         }
     </style>
@@ -1237,28 +1497,34 @@
 
     <!-- Intro Loader -->
     <div class="loader">
-        <div class="loader-text"><span>SCIONSYNTH</span></div>
+        <div class="loader-text">SCION<span>SYNTH</span></div>
+        <div class="loader-sub">TECH ECOSYSTEMS ARCHITECTURE</div>
     </div>
 
-    <!-- Nav -->
+    <!-- Navigation -->
     <nav id="navbar">
-        <a href="#" class="logo clickable">SCION<span>SYNTH</span></a>
+        <a href="index.html" class="logo clickable">
+            <div class="logo-symbol">S</div>
+            SCION<span>SYNTH</span>
+        </a>
         <div class="nav-links">
-            <a href="#services" class="clickable">Capabilities</a>
-            <a href="#how-it-works" class="clickable">Deployment</a>
-            <a href="#pricing" class="clickable">Pricing</a>
-            <a href="#about" class="clickable">Conviction</a>
+            <a href="web-development.html" class="clickable">Web Dev</a>
+            <a href="real-estate-3d.html" class="clickable">3D Real Estate</a>
+            <a href="google-business-seo.html" class="clickable">Local SEO</a>
+            <a href="email-marketing.html" class="clickable">Email Flows</a>
+            <a href="whatsapp-automation.html" class="clickable">WhatsApp</a>
+            <a href="b2b-lead-research.html" class="clickable">B2B Leads</a>
         </div>
         <div style="display: flex; gap: 1rem; align-items: center;">
             <a href="#contact" class="btn btn-nav clickable">
-                Book a call
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"
+                Book Tech Audit
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path d="M7 7h10v10"></path>
                     <path d="M7 17 17 7"></path>
                 </svg>
             </a>
-            <button class="mobile-menu-btn clickable" id="mobileMenuBtn">
+            <button class="mobile-menu-btn clickable" id="mobileMenuBtn" aria-label="Toggle Navigation">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -1268,250 +1534,687 @@
             </button>
         </div>
     </nav>
+
+    <!-- Mobile Overlay -->
     <div class="mobile-overlay" id="mobileOverlay">
-        <a href="#services" class="clickable mobile-link">Capabilities</a>
-        <a href="#how-it-works" class="clickable mobile-link">Deployment</a>
-        <a href="#pricing" class="clickable mobile-link">Pricing</a>
-        <a href="#about" class="clickable mobile-link">Conviction</a>
+        <a href="web-development.html" class="clickable mobile-link">Web Development</a>
+        <a href="real-estate-3d.html" class="clickable mobile-link">3D Real Estate</a>
+        <a href="google-business-seo.html" class="clickable mobile-link">Local SEO & Maps</a>
+        <a href="email-marketing.html" class="clickable mobile-link">Email Marketing</a>
+        <a href="whatsapp-automation.html" class="clickable mobile-link">WhatsApp Automation</a>
+        <a href="b2b-lead-research.html" class="clickable mobile-link">B2B Lead Research</a>
+        <a href="#contact" class="clickable mobile-link text-accent">Book Tech Audit</a>
     </div>
 
-    <a href="#contact" class="btn btn-pulse floating-cta clickable">Book Audit</a>
+    <a href="#contact" class="btn floating-cta clickable">Book Audit</a>
 
-    <!-- Hero -->
+    <!-- Hero Section -->
     <section class="hero" id="hero">
-        <div class="hero-gradient-overlay"></div>
         <div class="grid-bg" id="parallax-bg"></div>
         <canvas id="dnaCanvas"></canvas>
         <div class="container hero-content">
-            <div class="hero-badge reveal">
-                <span class="pulse-dot"></span>
-                Keep your money safe
+            <div class="hero-badge-container reveal">
+                <div class="badge-tag">
+                    <span class="pulse-dot"></span>
+                    Digital Transformation for Physical Brands
+                </div>
+                <div class="badge-tag blue">
+                    Setup · Maintain · Scale
+                </div>
             </div>
-            <h1 class="text-display reveal delay-1">Automate <span class="text-accent">the Boring.</span><br>Scale the
-                Meaningful.</h1>
-            <p class="subline reveal delay-2">Custom AI automation systems for modern businesses — built on robust
-                architecture. No
-                code needed on your end. High impact setups in 5–10 days.</p>
+            <h1 class="text-display reveal delay-1">
+                Bridge Legacy Business into the <span class="text-accent">Digital Frontier.</span>
+            </h1>
+            <p class="hero-subline reveal delay-2">
+                We engineer, deploy, and maintain complete end-to-end tech ecosystems for physical enterprises, retail brands, and real estate developers. From AI-driven web architectures and 3D virtual spaces to automated WhatsApp pipelines and hyper-targeted lead engines.
+            </p>
             <div class="hero-buttons reveal delay-3">
-                <a href="#contact" class="btn btn-pulse clickable">Initiate System Build</a>
-                <a href="#how-it-works" class="btn btn-outline clickable">Explore Process</a>
+                <a href="#contact" class="btn clickable">
+                    Build Your Tech Ecosystem
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5">
+                        <path d="M5 12h14"></path>
+                        <path d="m12 5 7 7-7 7"></path>
+                    </svg>
+                </a>
+                <a href="#services" class="btn btn-outline clickable">Explore Capabilities</a>
+            </div>
+
+            <!-- Trust Stats Strip -->
+            <div class="stats-ticker reveal delay-4">
+                <div class="stat-item">
+                    <div class="stat-val">100%</div>
+                    <div class="stat-label">Full-Stack Tech Setup</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-val">5–14<span style="font-size:1.1rem; color:var(--text-muted);">Days</span></div>
+                    <div class="stat-label">Rapid Deployment Cycle</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-val">₹1–5L+</div>
+                    <div class="stat-label">Predictable Client MRR Impact</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-val">24/7</div>
+                    <div class="stat-label">Automated Conversion Engines</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- How It Works (Reference Grid) -->
-    <section id="how-it-works">
+    <!-- Manifesto / The Bridge Section -->
+    <section class="manifesto-section" id="about">
         <div class="container">
-            <h2 class="text-heading reveal" style="margin-bottom: 2rem;">Deployment<br>Protocol.</h2>
-            <p class="reveal delay-1 text-muted" style="max-width: 500px; font-size: 1.05rem; margin-bottom: 4rem;">We
-                map your
-                current workflow and find exactly where you're losing time and money with extreme precision.</p>
+            <div class="section-header reveal">
+                <div class="badge-tag">The Core Mission</div>
+                <h2 class="text-heading">Physical Roots. <span class="text-accent">Exponential Reach.</span></h2>
+                <p class="text-muted">
+                    Most physical businesses have world-class products and decades of offline credibility, yet remain invisible online. We install the entire digital nervous system so you capture modern market share without technical friction.
+                </p>
+            </div>
 
-            <div class="steps-container">
-                <!-- Step 1 -->
-                <div class="step-card reveal delay-1">
-                    <div class="step-num">01.</div>
-                    <h3>Free Audit Phase.</h3>
-                    <p>We map your current workflow and find exactly where you're losing time and money. No sales
-                        pressure, pure operational clarity.</p>
+            <div class="pillar-grid">
+                <div class="pillar-card reveal delay-1">
+                    <div class="pillar-icon">🏛️</div>
+                    <h3>Modernize Legacy Stacks</h3>
+                    <p>Upgrade pen-and-paper operations, disconnected spreadsheets, and outdated directories into high-converting digital storefronts and unified CRMs.</p>
                 </div>
-
-                <!-- Step 2 -->
-                <div class="step-card highlight reveal delay-2">
-                    <div class="step-num">02.</div>
-                    <h3>System Architecture.</h3>
-                    <p>You get a custom AI-powered system in 5–10 business days — with full documentation and a
-                        walkthrough video. Everything works natively together.</p>
-                    <a href="#pricing" class="btn-learn clickable">View Architectures <span>&rarr;</span></a>
+                <div class="pillar-card reveal delay-2">
+                    <div class="pillar-icon">⚡</div>
+                    <h3>Engineered for Automation</h3>
+                    <p>No manual follow-ups or messy spreadsheets. Every inbound phone call, WhatsApp text, and website visitor is qualified and routed automatically.</p>
                 </div>
-
-                <!-- Step 3 -->
-                <div class="step-card reveal delay-3">
-                    <div class="step-num">03.</div>
-                    <h3>Protected Usage.</h3>
-                    <p>Everything is tested, documented, and handed off. We protect your automation layer and support
-                        you completely post-launch.</p>
+                <div class="pillar-card reveal delay-3">
+                    <div class="pillar-icon">🤝</div>
+                    <h3>Complete Tech Ecosystem Partner</h3>
+                    <p>We don't just hand over code and disappear. We continuously maintain, optimize, and update your software, listings, and marketing pipelines on retainer.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Capabilities -->
+    <!-- Core Services Section -->
     <section id="services" class="services-section">
         <div class="container">
-            <h2 class="text-heading reveal" style="margin-bottom: 3rem; text-align: center;">Our <span
-                    class="text-accent">Capabilities.</span></h2>
-            <div class="services-grid">
-                <div class="service-card reveal delay-1">
-                    <div class="service-icon">💬</div>
-                    <h3>AI Customer Support</h3>
-                    <p>Intelligent agents that resolve 80% of customer inquiries instantly. Trained on your specific
-                        docs and tone of voice.</p>
-                </div>
-                <div class="service-card reveal delay-2">
-                    <div class="service-icon">📊</div>
-                    <h3>Automated Lead Routing</h3>
-                    <p>Capture, qualify, and route leads into your CRM automatically. Never let a high-intent prospect
-                        slip through the cracks.</p>
-                </div>
-                <div class="service-card reveal delay-1">
-                    <div class="service-icon">⚙️</div>
-                    <h3>Internal Workflow Bots</h3>
-                    <p>Connect your fragmented tools (Slack, Notion, Airtable, etc.) with custom webhooks to eliminate
-                        manual data entry.</p>
-                </div>
-                <div class="service-card reveal delay-2">
-                    <div class="service-icon">🧠</div>
-                    <h3>Custom LLM Solutions</h3>
-                    <p>Private models fine-tuned for specialized tasks like contract analysis, content generation, or
-                        bespoke data extraction.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing -->
-    <section id="pricing" class="pricing-section">
-        <div class="container">
-            <div style="text-align: center;">
-                <h2 class="text-heading reveal"
-                    style="margin-bottom: 2rem; max-width: 1000px; margin-left: auto; margin-right: auto; line-height: 1.2;">
-                    Tailored <span class="text-accent">Pricing.</span> Infinite ROI.</h2>
+            <div class="section-header reveal">
+                <div class="badge-tag">Service Architecture</div>
+                <h2 class="text-heading">End-to-End <span class="text-accent">Tech Ecosystems</span></h2>
+                <p class="text-muted">
+                    A comprehensive suite of digital capabilities engineered to drive footfall, direct sales, enterprise B2B contracts, and brand authority.
+                </p>
             </div>
 
-            <div class="cards-wrapper" style="justify-content: center;">
-                <!-- Single Custom Pricing Card -->
-                <div class="price-card tilt-card reveal delay-1"
-                    style="max-width: 550px; border-color: rgba(204, 255, 0, 0.4); box-shadow: 0 20px 50px rgba(204, 255, 0, 0.05); padding-top: 4.5rem;">
-                    <div class="popular-badge" style="padding: 0.6rem 2rem; font-size: 0.85rem;">Bespoke Engagements
+            <div class="services-grid-main">
+
+                <!-- Service 1: Web Development & AI Architecture -->
+                <div class="service-box reveal delay-1">
+                    <div>
+                        <div class="service-box-header">
+                            <div class="service-box-icon">🌐</div>
+                            <span class="badge-tag">Core Infrastructure</span>
+                        </div>
+                        <h3>AI-Powered Web Development</h3>
+                        <p class="service-desc">
+                            We architect high-performance, conversion-optimized web platforms tailored to your business model and budget. From high-speed Shopify stores to breathtaking Framer experiences and intelligent AI web engines.
+                        </p>
+                        <div class="tools-label">Technology & Platform Suite:</div>
+                        <div class="tools-pill-grid">
+                            <div class="tool-pill">
+                                <strong>Shopify</strong> <span class="tool-badge-note">· E-Commerce & Retail</span>
+                            </div>
+                            <div class="tool-pill">
+                                <strong>Wix Studio</strong> <span class="tool-badge-note">· Fast & Cost Effective</span>
+                            </div>
+                            <div class="tool-pill">
+                                <strong>Framer</strong> <span class="tool-badge-note">· Premium Luxury Motion</span>
+                            </div>
+                            <div class="tool-pill">
+                                <strong>AI Custom Stack</strong> <span class="tool-badge-note">· One-Time Asset Build</span>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1.5rem;">
+                            <a href="web-development.html" class="clickable text-accent" style="text-decoration: none; font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+                                Explore Web Development Page &rarr;
+                            </a>
+                        </div>
                     </div>
-                    <h3 class="price-name" style="text-align: center; font-size: 2.4rem; margin-bottom: 1.5rem;">Custom
-                        Architecture</h3>
+                    <div class="service-economics">
+                        <div class="econ-block">
+                            <span class="econ-title">Turnaround</span>
+                            <span class="econ-val">5–10 Days</span>
+                        </div>
+                        <div class="econ-block">
+                            <span class="econ-title">Investment</span>
+                            <span class="econ-val highlight">Custom / 1-Time</span>
+                        </div>
+                        <div class="econ-block">
+                            <span class="econ-title">Maintenance</span>
+                            <span class="econ-val">Zero Downtime</span>
+                        </div>
+                    </div>
+                </div>
 
-                    <p
-                        style="color: var(--text-main); text-align: center; margin-bottom: 2.5rem; font-size: 1.1rem; line-height: 1.7; opacity: 0.9;">
-                        Every business operates uniquely. We reject one-size-fits-all templates in favor of precise,
-                        high-impact systems. Your investment is meticulously calibrated based on your specific
-                        requirements, workflow complexity, and scalability goals.
-                    </p>
+                <!-- Service 2: Google Business Setup + Hyperlocal SEO -->
+                <div class="service-box reveal delay-2">
+                    <div>
+                        <div class="service-box-header">
+                            <div class="service-box-icon">📍</div>
+                            <span class="badge-tag">Local Authority</span>
+                        </div>
+                        <h3>Google Business Profile & Local SEO</h3>
+                        <p class="service-desc">
+                            Dominate local Google Search and Google Maps. We optimize business listings, review acceleration engines, citation architecture, and location landing pages so customers nearby find and call you first.
+                        </p>
+                        <div class="tools-label">Target Capabilities:</div>
+                        <div class="tools-pill-grid">
+                            <div class="tool-pill">Google Maps Top 3 Pack</div>
+                            <div class="tool-pill">Automated Review Funnel</div>
+                            <div class="tool-pill">Hyperlocal Keyword Dominance</div>
+                            <div class="tool-pill">Geo-Targeted Location Pages</div>
+                        </div>
+                        <div style="margin-bottom: 1.5rem;">
+                            <a href="google-business-seo.html" class="clickable text-accent" style="text-decoration: none; font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+                                Explore Google SEO & Maps Page &rarr;
+                            </a>
+                        </div>
+                    </div>
+                    <div class="service-economics">
+                        <div class="econ-block">
+                            <span class="econ-title">Typical Retainer</span>
+                            <span class="econ-val highlight">₹10k–₹25k / mo</span>
+                        </div>
+                        <div class="econ-block">
+                            <span class="econ-title">MRR Target Goal</span>
+                            <span class="econ-val">₹1L–₹5L (4–20 Clients)</span>
+                        </div>
+                        <div class="econ-block">
+                            <span class="econ-title">Operational Friction</span>
+                            <span class="econ-val">Low Post-Setup</span>
+                        </div>
+                    </div>
+                </div>
 
-                    <ul class="price-features"
-                        style="margin-bottom: 2.5rem; display: flex; flex-direction: column; gap: 0.5rem; max-width: 400px; margin-left: auto; margin-right: auto;">
-                        <li>Bespoke system design and workflow mapping</li>
-                        <li>Seamless integration with your existing stack</li>
-                        <li>Dedicated post-launch support and iteration</li>
-                        <li>ROI-focused automation architecture</li>
-                    </ul>
-                    <a href="#contact" class="btn clickable"
-                        style="width: 100%; text-align: center; padding: 1.2rem;">Book a Free Audit</a>
+                <!-- Service 3: Email Marketing & Lifecycle Funnels -->
+                <div class="service-box reveal delay-1">
+                    <div>
+                        <div class="service-box-header">
+                            <div class="service-box-icon">✉️</div>
+                            <span class="badge-tag">Customer LTV</span>
+                        </div>
+                        <h3>Email Marketing & Lifecycle Automation</h3>
+                        <p class="service-desc">
+                            Turn one-time buyers into lifelong brand advocates. We build high-converting weekly newsletters, VIP promotional campaigns, automated welcome sequences, and abandoned-cart recovery workflows.
+                        </p>
+                        <div class="tools-label">Campaign Types:</div>
+                        <div class="tools-pill-grid">
+                            <div class="tool-pill">Welcome & Nurture Flows</div>
+                            <div class="tool-pill">Abandoned Cart Sequences</div>
+                            <div class="tool-pill">VIP Loyalty & Re-engagement</div>
+                            <div class="tool-pill">High-CTR Editorial Newsletters</div>
+                        </div>
+                        <div style="margin-bottom: 1.5rem;">
+                            <a href="email-marketing.html" class="clickable text-accent" style="text-decoration: none; font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+                                Explore Email Marketing Page &rarr;
+                            </a>
+                        </div>
+                    </div>
+                    <div class="service-economics">
+                        <div class="econ-block">
+                            <span class="econ-title">Typical Retainer</span>
+                            <span class="econ-val highlight">₹15k–₹40k / mo</span>
+                        </div>
+                        <div class="econ-block">
+                            <span class="econ-title">MRR Target Goal</span>
+                            <span class="econ-val">₹1L–₹5L (3–13 Clients)</span>
+                        </div>
+                        <div class="econ-block">
+                            <span class="econ-title">Client Retention</span>
+                            <span class="econ-val">High (Recurring)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 4: B2B Market Research & Lead Lists -->
+                <div class="service-box reveal delay-2">
+                    <div>
+                        <div class="service-box-header">
+                            <div class="service-box-icon">🎯</div>
+                            <span class="badge-tag">Outbound Pipeline</span>
+                        </div>
+                        <h3>B2B Market Research & Lead Intelligence</h3>
+                        <p class="service-desc">
+                            Empower your sales team with verified decision-maker datasets. We deep-research target companies, C-level executives, supply chain distributors, and competitor strengths with custom prospecting playbooks.
+                        </p>
+                        <div class="tools-label">Deliverables:</div>
+                        <div class="tools-pill-grid">
+                            <div class="tool-pill">Verified C-Suite Contacts</div>
+                            <div class="tool-pill">Competitor Market Analysis</div>
+                            <div class="tool-pill">Account-Based Prospecting</div>
+                            <div class="tool-pill">Enriched CRM Data Ingestion</div>
+                        </div>
+                        <div style="margin-bottom: 1.5rem;">
+                            <a href="b2b-lead-research.html" class="clickable text-accent" style="text-decoration: none; font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+                                Explore B2B Lead Intelligence Page &rarr;
+                            </a>
+                        </div>
+                    </div>
+                    <div class="service-economics">
+                        <div class="econ-block">
+                            <span class="econ-title">Project / Retainer</span>
+                            <span class="econ-val highlight">₹10k–₹40k / engagement</span>
+                        </div>
+                        <div class="econ-block">
+                            <span class="econ-title">MRR Target Goal</span>
+                            <span class="econ-val">₹1L–₹5L (3–13 Clients)</span>
+                        </div>
+                        <div class="econ-block">
+                            <span class="econ-title">Sales Impact</span>
+                            <span class="econ-val">Immediate Pipeline</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 5: WhatsApp Automation & Campaigns -->
+                <div class="service-box reveal delay-1">
+                    <div>
+                        <div class="service-box-header">
+                            <div class="service-box-icon" style="color: #25d366; background: rgba(37,211,102,0.1); border-color: rgba(37,211,102,0.25);">💬</div>
+                            <span class="badge-tag" style="color: #25d366; border-color: rgba(37,211,102,0.3); background: rgba(37,211,102,0.08);">Instant Conversions</span>
+                        </div>
+                        <h3>WhatsApp Marketing & API Automation</h3>
+                        <p class="service-desc">
+                            Reach customers where they actually read messages. We integrate automated 24/7 AI chat responders, order notifications, promotional broadcast campaigns, and automated lead capture on WhatsApp.
+                        </p>
+                        <div class="tools-label">Automation Features:</div>
+                        <div class="tools-pill-grid">
+                            <div class="tool-pill">Automated FAQs & Booking Bot</div>
+                            <div class="tool-pill">Broadcast Marketing Campaigns</div>
+                            <div class="tool-pill">Instant Inquiry Lead Alerts</div>
+                            <div class="tool-pill">WhatsApp Catalog Integration</div>
+                        </div>
+                        <div style="margin-bottom: 1.5rem;">
+                            <a href="whatsapp-automation.html" class="clickable text-accent" style="text-decoration: none; font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.4rem; color: #25d366;">
+                                Explore WhatsApp Automation Page &rarr;
+                            </a>
+                        </div>
+                    </div>
+                    <div class="service-economics">
+                        <div class="econ-block">
+                            <span class="econ-title">Open Rates</span>
+                            <span class="econ-val highlight">98% Avg</span>
+                        </div>
+                        <div class="econ-block">
+                            <span class="econ-title">Response Latency</span>
+                            <span class="econ-val">&lt; 2 Seconds</span>
+                        </div>
+                        <div class="econ-block">
+                            <span class="econ-title">Integration</span>
+                            <span class="econ-val">Direct CRM Hook</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 6: 3D Real Estate & Interactive Environments (Featured Showcase) -->
+                <div class="service-box interactive-3d-box reveal delay-2" id="showcase">
+                    <div>
+                        <div class="service-box-header">
+                            <div class="service-box-icon" style="color: var(--accent-cyan); background: rgba(0,240,255,0.1); border-color: rgba(0,240,255,0.25);">🏗️</div>
+                            <span class="badge-tag blue">Spatial Computing</span>
+                        </div>
+                        <h3>Real Estate 3D Buildings & Interactive Worlds</h3>
+                        <p class="service-desc">
+                            Transform blueprints and physical developments into mesmerizing, interactive 3D web environments. Prospective buyers and commercial investors can explore architectural properties, floor plans, and spatial units in real-time from any device.
+                        </p>
+                        <div class="tools-label">Spatial Technologies:</div>
+                        <div class="tools-pill-grid">
+                            <div class="tool-pill">Interactive 3D Walkthroughs</div>
+                            <div class="tool-pill">Three.js / WebGL Rendering</div>
+                            <div class="tool-pill">Architectural Visual Twins</div>
+                            <div class="tool-pill">Zero-Plugin Browser Engine</div>
+                        </div>
+                        <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <a href="real-estate-3d.html" class="btn clickable" style="padding: 0.7rem 1.6rem; font-size: 0.85rem; background: var(--accent-cyan); box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);">
+                                Explore Dedicated 3D Page &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Interactive 3D Canvas Preview -->
+                    <div class="canvas-3d-container">
+                        <div class="canvas-overlay-ui">
+                            <div class="canvas-tag">3D Interactive Engine Active</div>
+                        </div>
+                        <canvas id="buildingCanvas"></canvas>
+                        <div class="canvas-controls-hint">Move cursor to orbit 3D structure</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap & Process Section -->
+    <section class="roadmap-section" id="roadmap">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="badge-tag">The Deployment Protocol</div>
+                <h2 class="text-heading">How We Build Your <span class="text-accent">Ecosystem</span></h2>
+                <p class="text-muted">
+                    A streamlined, 4-phase transformation roadmap designed to bring physical operations into digital dominance in under two weeks.
+                </p>
+            </div>
+
+            <div class="roadmap-grid">
+                <div class="roadmap-card reveal delay-1">
+                    <span class="step-index">PHASE 01</span>
+                    <h4>Digital Stack Audit</h4>
+                    <p>We analyze your existing physical workflows, local market presence, customer acquisition channels, and technical bottlenecks.</p>
+                </div>
+                <div class="roadmap-card reveal delay-2">
+                    <span class="step-index">PHASE 02</span>
+                    <h4>Architecture & Build</h4>
+                    <p>We develop your modern website (Shopify/Wix/Framer/AI), render 3D spatial models, and configure Google Local SEO assets.</p>
+                </div>
+                <div class="roadmap-card reveal delay-3">
+                    <span class="step-index">PHASE 03</span>
+                    <h4>Automation Integration</h4>
+                    <p>We deploy WhatsApp chat bots, automated email sequences, and B2B outbound lead pipelines connecting directly to your team.</p>
+                </div>
+                <div class="roadmap-card reveal delay-4">
+                    <span class="step-index">PHASE 04</span>
+                    <h4>Maintenance & Growth</h4>
+                    <p>We actively manage, update, test, and protect your digital infrastructure on ongoing monthly retainers with guaranteed uptime.</p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="retainer-note reveal" style="margin-top: 4rem;">
-                <strong>Need ongoing maintenance?</strong> Retainer packages are available post-launch to continuously
-                optimize and upgrade your systems as you scale.
+    <!-- Interactive ROI & Revenue Calculator -->
+    <section class="calculator-section" id="calculator">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="badge-tag">Growth Estimator</div>
+                <h2 class="text-heading">Estimate Your <span class="text-accent">Ecosystem ROI</span></h2>
+                <p class="text-muted">
+                    Select your business archetype and required capabilities to calculate estimated project turnaround, team hours saved, and monthly revenue upside.
+                </p>
+            </div>
+
+            <div class="calc-wrapper reveal">
+                <div class="calc-form">
+                    <div class="form-group">
+                        <label class="form-label" for="bizType">
+                            <span>Your Business Industry</span>
+                        </label>
+                        <select id="bizType" class="calc-select clickable" onchange="calculateROI()">
+                            <option value="retail">Physical Retail / Showroom / Brand</option>
+                            <option value="realestate">Real Estate & Property Development</option>
+                            <option value="b2b">Manufacturing / B2B Supply Enterprise</option>
+                            <option value="hospitality">Hospitality / Clinic / Service Clinic</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <span>Selected Ecosystem Capabilities</span>
+                        </label>
+                        <div class="services-check-grid">
+                            <label class="service-checkbox-label clickable">
+                                <input type="checkbox" id="chkWeb" checked onchange="calculateROI()"> AI / E-Commerce Website
+                            </label>
+                            <label class="service-checkbox-label clickable">
+                                <input type="checkbox" id="chkSeo" checked onchange="calculateROI()"> Google Local SEO & Reviews
+                            </label>
+                            <label class="service-checkbox-label clickable">
+                                <input type="checkbox" id="chk3d" onchange="calculateROI()"> Real Estate 3D Visualizer
+                            </label>
+                            <label class="service-checkbox-label clickable">
+                                <input type="checkbox" id="chkEmail" checked onchange="calculateROI()"> Email Marketing Flows
+                            </label>
+                            <label class="service-checkbox-label clickable">
+                                <input type="checkbox" id="chkLead" onchange="calculateROI()"> B2B Market Research & Leads
+                            </label>
+                            <label class="service-checkbox-label clickable">
+                                <input type="checkbox" id="chkWa" checked onchange="calculateROI()"> WhatsApp Automation Bot
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="clientScale">
+                            <span>Current Monthly Footfall / Target Client Volume: <strong id="volumeLabel" class="text-accent">50 Leads/mo</strong></span>
+                        </label>
+                        <input type="range" id="clientScale" class="calc-slider clickable" min="10" max="500" value="50" step="10" oninput="calculateROI()">
+                    </div>
+                </div>
+
+                <div class="calc-result-box">
+                    <div>
+                        <div class="calc-metric-row">
+                            <div class="calc-metric-title">Estimated Monthly Growth Impact</div>
+                            <div class="calc-metric-number" id="revenueImpact">₹1,85,000</div>
+                            <p class="calc-metric-desc">Projected incremental top-line revenue captured through local search, automated follow-ups, and conversion lift.</p>
+                        </div>
+
+                        <div class="calc-metric-row" style="margin-bottom: 0;">
+                            <div class="calc-metric-title">Staff Hours Saved Monthly</div>
+                            <div class="calc-metric-number" style="font-size: 1.8rem; color: #fff;" id="hoursSaved">65+ Hours</div>
+                            <p class="calc-metric-desc">Eliminated manual phone calls, manual data entry, and lost lead follow-ups.</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem;">
+                        <a href="#contact" class="btn clickable" style="width: 100%; text-align: center;">
+                            Claim This Ecosystem Setup
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Narrative Block -->
-    <section id="about">
-        <div class="container narrative-block reveal">
-            <p><strong>Time is the only asset you cannot buy back.</strong> Yet, most business operators burn their best
-                hours on repetitive administrative tasks, data entry, and manual follow-ups.</p>
-            <p>I build <strong>invisible infrastructure</strong>. Systems that work silently in the background—capturing
-                leads, routing data, answering queries, and executing processes with zero human error.</p>
-            <p>If this saves your team 10 hrs/week at $35/hr, that's $1,400/month saved. <strong
-                    class="narrative-highlight">Your custom automation pays for itself in weeks, not years.</strong>
-                Most
-                clients see full ROI within 30 days. It's 10× faster than hiring a developer, 5× cheaper, and requires
-                zero codebase to maintain.</p>
+    <!-- Retainer & Transparent Pricing Plans -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="badge-tag">Predictable Investment</div>
+                <h2 class="text-heading">Setup Packages & <span class="text-accent">Retainers</span></h2>
+                <p class="text-muted">
+                    Clear, transparent packages designed for immediate ROI. No hidden fees or bloated agency overhead.
+                </p>
+            </div>
+
+            <div class="pricing-grid">
+
+                <!-- Tier 1: Local Growth Stack -->
+                <div class="pricing-card reveal delay-1">
+                    <div>
+                        <h3 class="package-name">Local Digital Presence</h3>
+                        <p class="package-subtitle">Ideal for physical stores, local practices & service outlets.</p>
+                        <div class="package-price-wrap">
+                            <span class="price-currency">₹</span>
+                            <span class="price-val">15,000</span>
+                            <span class="price-cadence">/ month</span>
+                        </div>
+                        <ul class="feature-list">
+                            <li class="feature-item">
+                                <span class="feature-check">✓</span>
+                                <span>Google Business Profile top ranking & Maps optimization</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-check">✓</span>
+                                <span>Automated 5-Star review generation system</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-check">✓</span>
+                                <span>WhatsApp instant response bot for incoming queries</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-check">✓</span>
+                                <span>Monthly local keyword citation upkeep</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="btn btn-outline clickable" style="width: 100%; text-align: center;">Get Started</a>
+                </div>
+
+                <!-- Tier 2: Complete Tech Ecosystem (Featured) -->
+                <div class="pricing-card featured reveal delay-2">
+                    <div class="featured-badge">Most Popular Growth Stack</div>
+                    <div>
+                        <h3 class="package-name">Full Omnichannel Ecosystem</h3>
+                        <p class="package-subtitle">For retail brands, physical showrooms & scaling enterprises.</p>
+                        <div class="package-price-wrap">
+                            <span class="price-currency">₹</span>
+                            <span class="price-val">35,000</span>
+                            <span class="price-cadence">/ month</span>
+                        </div>
+                        <ul class="feature-list">
+                            <li class="feature-item">
+                                <span class="feature-check">✓</span>
+                                <span>High-performance AI / E-Commerce Website (Shopify/Framer)</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-check">✓</span>
+                                <span>Google Maps Dominance & Hyperlocal SEO rankings</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-check">✓</span>
+                                <span>Lifecycle Email Marketing (Newsletters + Abandoned Cart)</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-check">✓</span>
+                                <span>Full WhatsApp CRM automation & promotional broadcasts</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-check">✓</span>
+                                <span>24/7 technical monitoring, updates & server maintenance</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="btn clickable" style="width: 100%; text-align: center;">Deploy Ecosystem</a>
+                </div>
+
+                <!-- Tier 3: Enterprise & B2B / 3D Real Estate -->
+                <div class="pricing-card reveal delay-3">
+                    <div>
+                        <h3 class="package-name">Spatial & Enterprise B2B</h3>
+                        <p class="package-subtitle">For Real Estate developers, builders & B2B manufacturers.</p>
+                        <div class="package-price-wrap">
+                            <span class="price-currency">₹</span>
+                            <span class="price-val">65,000+</span>
+                            <span class="price-cadence">/ custom build</span>
+                        </div>
+                        <ul class="feature-list">
+                            <li class="feature-item">
+                                <span class="feature-check">✓</span>
+                                <span>Interactive 3D Real Estate & Architectural Web Environment</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-check">✓</span>
+                                <span>Targeted B2B Market Research & C-Suite Verified Lead Lists</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-check">✓</span>
+                                <span>Multi-channel outbound pipeline setup</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="feature-check">✓</span>
+                                <span>Custom CRM webhooks & internal workflow bot integration</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="btn btn-outline clickable" style="width: 100%; text-align: center;">Book Enterprise Call</a>
+                </div>
+
+            </div>
+
+            <!-- Comparison Table: Legacy vs Scionsynth -->
+            <div class="comparison-table-wrap reveal">
+                <table class="comp-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">Operational Dimension</th>
+                            <th style="width: 35%;">Traditional Legacy Approach</th>
+                            <th style="width: 35%; color: var(--accent);">Scionsynth Unified Ecosystem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: 600; color: #fff;">Customer Acquisition</td>
+                            <td>Relying solely on physical walk-ins and word-of-mouth</td>
+                            <td class="brand-col">Omnichannel: Google Maps Top-3, SEO, WhatsApp & Direct Web</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: #fff;">Lead Response Time</td>
+                            <td>Hours or days (missed phone calls and lost sales)</td>
+                            <td class="brand-col">&lt; 2-Second automated WhatsApp & AI qualification</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: #fff;">Property & Product Showcase</td>
+                            <td>Flat PDFs, paper brochures, or static low-res photos</td>
+                            <td class="brand-col">Interactive 3D Web Walkthroughs and real-time floor plans</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: #fff;">B2B Prospecting</td>
+                            <td>Manual directory searching and cold guesswork</td>
+                            <td class="brand-col">Verified C-level decision-maker datasets & tailored campaigns</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: #fff;">Tech Maintenance</td>
+                            <td>Hiring 3-4 separate freelancers who never coordinate</td>
+                            <td class="brand-col">One single, dedicated tech partner managing your entire stack</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 
-    <!-- Contact & Calendly -->
+    <!-- Conviction Statement -->
+    <section>
+        <div class="container conviction-block reveal">
+            <p>
+                <strong>The physical world is timeless, but attention is purely digital.</strong> Legacy businesses with decades of trust shouldn't lose market dominance to digital-native upstarts just because of technical barriers.
+            </p>
+            <p>
+                At Scionsynth, we build the <strong>invisible digital infrastructure</strong> that turns your offline authority into an automated revenue powerhouse.
+            </p>
+            <p class="conviction-highlight">
+                Zero codebase for you to maintain. 100% turnkey execution.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact & Consultation (Calendly + WhatsApp) -->
     <section id="contact" class="contact-section">
         <div class="container">
-            <h2 class="text-display reveal">Stop doing manually<br>what can run <span
-                    class="text-accent">automatically.</span></h2>
-            <p class="reveal">Book a free 20-minute audit. I'll map your workflow, find the bottlenecks, and show you
-                exactly what can be automated — no obligation, no pitch.</p>
+            <div class="badge-tag reveal">Initiate Transformation</div>
+            <h2 class="text-display reveal" style="margin-top: 1rem; margin-bottom: 1.2rem;">
+                Let’s Engineer Your <span class="text-accent">Tech Stack.</span>
+            </h2>
+            <p class="reveal text-muted" style="max-width: 620px; margin: 0 auto; font-size: 1.1rem;">
+                Schedule a complimentary 20-minute Tech Ecosystem Audit. We'll map your business workflow, identify digital blind spots, and present an exact roadmap tailored to your goals.
+            </p>
 
+            <!-- Calendly Inline Widget -->
             <div class="calendly-wrapper reveal">
-                <!-- Calendly inline widget begin -->
                 <div class="calendly-inline-widget"
-                    data-url="https://calendly.com/prajith30v/30min?hide_event_type_details=1&hide_gdpr_banner=1&background_color=111111&text_color=ffffff&primary_color=ccff00"
+                    data-url="https://calendly.com/prajith30v/30min?hide_event_type_details=1&hide_gdpr_banner=1&background_color=050505&text_color=ffffff&primary_color=ccff00"
                     style="min-width:320px;height:100%;"></div>
-                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"
-                    async></script>
-                <!-- Calendly inline widget end -->
+                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
             </div>
 
-            <style>
-                .premium-wa-btn {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 14px;
-                    padding: 1.2rem 3rem;
-                    background: rgba(20, 20, 20, 0.4);
-                    border: 1px solid rgba(255, 255, 255, 0.05);
-                    backdrop-filter: blur(16px);
-                    -webkit-backdrop-filter: blur(16px);
-                    border-radius: 100px;
-                    color: var(--text-main);
-                    text-decoration: none;
-                    font-family: var(--font-body);
-                    font-weight: 500;
-                    font-size: 1.1rem;
-                    transition: all 0.5s var(--ease-out);
-                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-                    position: relative;
-                    overflow: hidden;
-                    margin-bottom: 0.5rem;
-                }
-
-                .premium-wa-btn::before {
-                    content: '';
-                    position: absolute;
-                    inset: 0;
-                    background: linear-gradient(90deg, transparent, rgba(37, 211, 102, 0.1), transparent);
-                    transform: translateX(-100%);
-                    transition: transform 0.8s var(--ease-main);
-                }
-
-                .premium-wa-btn:hover {
-                    border-color: rgba(37, 211, 102, 0.4);
-                    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(37, 211, 102, 0.15);
-                    transform: translateY(-3px);
-                    background: rgba(37, 211, 102, 0.03);
-                }
-
-                .premium-wa-btn:hover::before {
-                    transform: translateX(100%);
-                }
-
-                .premium-wa-icon {
-                    fill: #25D366;
-                    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-                }
-
-                .premium-wa-btn:hover .premium-wa-icon {
-                    transform: scale(1.15) rotate(5deg);
-                }
-            </style>
-            <div class="reveal"
-                style="margin-top: 4rem; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
-                <a href="https://wa.me/" target="_blank" class="clickable premium-wa-btn">
-                    <svg class="premium-wa-icon" width="24" height="24" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.489-1.761-1.662-2.06-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
+            <!-- WhatsApp & Direct Channel -->
+            <div class="reveal" style="margin-top: 3.5rem; display: flex; flex-direction: column; align-items: center; gap: 1.2rem;">
+                <a href="https://wa.me/?text=Hi%20Scionsynth,%20I'd%20like%20to%20inquire%20about%20setting%20up%20a%20Tech%20Ecosystem%20for%20my%20business." target="_blank" class="clickable wa-contact-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#25D366">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.489-1.761-1.662-2.06-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
                     </svg>
-                    Inquire via WhatsApp
+                    Chat Directly on WhatsApp
                 </a>
-                <p class="contact-footer-note" style="margin-top: 0;">Or <a href="mailto:prajith30v@gmail.com"
-                        class="clickable text-accent" style="text-decoration: none;">Email Me</a> · Response within 24
-                    hours</p>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">
+                    Or email directly: <a href="mailto:prajith30v@gmail.com" class="clickable text-accent" style="text-decoration: none;">prajith30v@gmail.com</a> · Guaranteed response within 12 hours
+                </p>
             </div>
         </div>
     </section>
@@ -1521,39 +2224,47 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <h3>SCION<span>SYNTH</span></h3>
-                <p>AI Automation Specialist | Pricing</p>
+                <p>Architecting, deploying, and maintaining unified tech ecosystems for physical brands, real estate developers, and legacy enterprises.</p>
             </div>
-            <div class="footer-links" style="grid-column: span 2;">
-                <h4>Platform Navigation</h4>
-                <ul style="display: flex; gap: 2rem; flex-wrap: wrap;">
-                    <li><a href="#hero" class="clickable">Home</a></li>
-                    <li><a href="#services" class="clickable">Capabilities</a></li>
-                    <li><a href="#how-it-works" class="clickable">Deployment</a></li>
-                    <li><a href="#pricing" class="clickable">Pricing</a></li>
-                    <li><a href="#about" class="clickable">Conviction</a></li>
+            <div class="footer-links">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#services" class="clickable">AI Web Platforms</a></li>
+                    <li><a href="#showcase" class="clickable">Real Estate 3D Worlds</a></li>
+                    <li><a href="#services" class="clickable">Google Business & SEO</a></li>
+                    <li><a href="#services" class="clickable">Email Marketing Funnels</a></li>
+                    <li><a href="#services" class="clickable">WhatsApp Automation</a></li>
+                    <li><a href="#services" class="clickable">B2B Lead Intelligence</a></li>
                 </ul>
             </div>
             <div class="footer-links">
-                <h4
-                    style="color: rgba(255,255,255,0.4); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">
-                    Social & Contact</h4>
+                <h4>Ecosystem</h4>
                 <ul>
-                    <li><a href="mailto:prajith30v@gmail.com" class="clickable">Email Request</a></li>
-                    <li><a href="https://calendly.com/prajith30v/30min" target="_blank" class="clickable">Calendly
-                            Audit</a></li>
+                    <li><a href="#hero" class="clickable">Overview</a></li>
+                    <li><a href="#roadmap" class="clickable">Deployment Roadmap</a></li>
+                    <li><a href="#calculator" class="clickable">Growth Calculator</a></li>
+                    <li><a href="#pricing" class="clickable">Retainer Packages</a></li>
+                    <li><a href="#about" class="clickable">Why Scionsynth</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Direct Contact</h4>
+                <ul>
+                    <li><a href="mailto:prajith30v@gmail.com" class="clickable">prajith30v@gmail.com</a></li>
+                    <li><a href="https://calendly.com/prajith30v/30min" target="_blank" class="clickable">Schedule 20-Min Audit</a></li>
+                    <li><a href="https://wa.me/" target="_blank" class="clickable" style="color: #25d366;">WhatsApp Hotline</a></li>
                 </ul>
             </div>
         </div>
-        <div class="copyright"
-            style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem;">
-            <span>&copy; 2026 Scionsynth.</span>
-            <span style="color: var(--accent);">Built for scale.</span>
+        <div class="copyright-bar">
+            <span>&copy; 2026 Scionsynth. All Rights Reserved.</span>
+            <span style="color: var(--accent); font-family: var(--font-mono);">BUILT FOR PHYSICAL TO DIGITAL SCALE</span>
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Interactive Scripts -->
     <script>
-        // Custom Cursor
+        // Custom Interactive Cursor
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorRing = document.querySelector('.cursor-ring');
 
@@ -1561,35 +2272,32 @@
             cursorDot.style.left = e.clientX + 'px';
             cursorDot.style.top = e.clientY + 'px';
 
-            // Lagging ring effect
             setTimeout(() => {
                 cursorRing.style.left = e.clientX + 'px';
                 cursorRing.style.top = e.clientY + 'px';
-            }, 50);
+            }, 45);
         });
 
-        document.querySelectorAll('.clickable, a, button').forEach(el => {
+        document.querySelectorAll('.clickable, a, button, select, input').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
         });
 
-        // Intro Loader Removal
+        // Fast Intro Loader Removal
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.querySelector('.loader').classList.add('hidden');
-                document.body.classList.add('loaded');
-            }, 600); // Super fast loader removal for immediate retention action
+            }, 450);
         });
 
-        // Sticky Navbar
+        // Sticky Navbar on Scroll
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) navbar.classList.add('scrolled');
+            if (window.scrollY > 40) navbar.classList.add('scrolled');
             else navbar.classList.remove('scrolled');
         });
 
-        // Scroll Reveals (Intersection Observer)
-        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+        // Scroll Observer for Smooth Reveals
         const observer = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1597,43 +2305,9 @@
                     obs.unobserve(entry.target);
                 }
             });
-        }, observerOptions);
+        }, { root: null, rootMargin: '0px', threshold: 0.12 });
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        // 3D Tilt Effect on Pricing Cards
-        const cards = document.querySelectorAll('.tilt-card');
-        cards.forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = ((y - centerY) / centerY) * -8;
-                const rotateY = ((x - centerX) / centerX) * 8;
-                // Only apply tilt on non-mobile sizing
-                if (window.innerWidth > 992) {
-                    card.style.transform = `perspective(1500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-                }
-            });
-            card.addEventListener('mouseleave', () => {
-                if (window.innerWidth > 992) {
-                    card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
-                }
-            });
-        });
-
-        // Cards Hover Glow Effect
-        document.querySelectorAll('.service-card').forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-            });
-        });
 
         // Mobile Menu Toggle
         const mobileBtn = document.getElementById('mobileMenuBtn');
@@ -1644,25 +2318,26 @@
             mobileOverlay.classList.toggle('active');
             const isActive = mobileOverlay.classList.contains('active');
             mobileBtn.innerHTML = isActive
-                ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>'
-                : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+                ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>'
+                : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
         });
 
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileOverlay.classList.remove('active');
-                mobileBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+                mobileBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
             });
         });
 
-        // Parallax scroll on hero background
+        // Parallax background grid scroll
         const parallaxBg = document.getElementById('parallax-bg');
-        window.addEventListener('scroll', () => {
-            const scrollPos = window.scrollY;
-            parallaxBg.style.transform = `translateY(${scrollPos * 0.4}px)`;
-        });
+        if (parallaxBg) {
+            window.addEventListener('scroll', () => {
+                parallaxBg.style.transform = `translateY(${window.scrollY * 0.35}px)`;
+            });
+        }
 
-        // Node Graph Canvas Animation (Neon Green accents)
+        // Ambient Node Graph Particle Network
         const canvas = document.getElementById('nodeGraph');
         const ctx = canvas.getContext('2d');
         let width, height;
@@ -1681,8 +2356,8 @@
             constructor() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 1;
-                this.vy = (Math.random() - 0.5) * 1;
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
                 this.radius = Math.random() * 1.5 + 0.5;
             }
             update() {
@@ -1694,15 +2369,14 @@
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(204, 255, 0, 0.4)';
+                ctx.fillStyle = 'rgba(204, 255, 0, 0.35)';
                 ctx.fill();
             }
         }
 
         function initNodes() {
             nodes = [];
-            // Higher density value means FEWER nodes. Greatly reduce nodes on mobile for performance.
-            const density = isMobile ? 25000 : 12000;
+            const density = isMobile ? 26000 : 13000;
             const numNodes = Math.floor(width * height / density);
             for (let i = 0; i < numNodes; i++) nodes.push(new Node());
         }
@@ -1716,16 +2390,15 @@
                 node.draw();
             });
 
-            // Connect nodes (Skip drawing lines on mobile to significantly boost performance)
             if (!isMobile) {
                 for (let i = 0; i < nodes.length; i++) {
                     for (let j = i + 1; j < nodes.length; j++) {
                         const dx = nodes[i].x - nodes[j].x;
                         const dy = nodes[i].y - nodes[j].y;
                         const dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < 150) {
+                        if (dist < 140) {
                             ctx.beginPath();
-                            ctx.strokeStyle = `rgba(204, 255, 0, ${0.15 - dist / 1000})`;
+                            ctx.strokeStyle = `rgba(204, 255, 0, ${0.12 - dist / 1200})`;
                             ctx.lineWidth = 0.5;
                             ctx.moveTo(nodes[i].x, nodes[i].y);
                             ctx.lineTo(nodes[j].x, nodes[j].y);
@@ -1738,62 +2411,61 @@
         }
         animateNodes();
 
-        // High-Fidelity DNA Particle Animation
+        // DNA Helical Particle Stream Canvas (Hero)
         const dnaCanvas = document.getElementById('dnaCanvas');
         if (dnaCanvas) {
             const dnaCtx = dnaCanvas.getContext('2d');
             let dnaWidth, dnaHeight;
             let dnaParticles = [];
-            
+
             class DNAParticle {
                 constructor(y, phase, isRung) {
                     this.baseY = y;
-                    this.phase = phase; 
+                    this.phase = phase;
                     this.isRung = isRung;
                     this.x = 0;
                     this.y = y;
                     this.size = 2;
-                    this.jitterX = (Math.random() - 0.5) * 20;
-                    this.jitterY = (Math.random() - 0.5) * 20;
-                    this.jitterZ = (Math.random() - 0.5) * 20;
+                    this.jitterX = (Math.random() - 0.5) * 16;
+                    this.jitterY = (Math.random() - 0.5) * 16;
+                    this.jitterZ = (Math.random() - 0.5) * 16;
                 }
-                
+
                 update(time, centerX, centerY) {
-                    const rot = time * 0.001 + this.baseY * 0.008; 
-                    const radius = 80; 
+                    const rot = time * 0.001 + this.baseY * 0.008;
+                    const radius = 75;
                     const currentPhase = this.phase + rot;
-                    
+
                     let rawX = Math.cos(currentPhase) * radius + this.jitterX;
                     let rawZ = Math.sin(currentPhase) * radius + this.jitterZ;
                     let rawY = this.baseY + this.jitterY;
 
                     if (this.isRung) {
-                         const t = this.phase; 
-                         rawX = t * Math.cos(rot) * radius + this.jitterX;
-                         rawZ = t * Math.sin(rot) * radius + this.jitterZ;
+                        const t = this.phase;
+                        rawX = t * Math.cos(rot) * radius + this.jitterX;
+                        rawZ = t * Math.sin(rot) * radius + this.jitterZ;
                     }
 
                     const perspective = 300;
                     const scale = perspective / (perspective + rawZ + 150);
-                    
+
                     let projX = centerX + rawX * scale;
-                    let projY = rawY; 
-                    
-                    // Diagonal tilt (opposite direction)
-                    const tilt = 0.35; // radians (about 20 degrees)
+                    let projY = rawY;
+
+                    const tilt = 0.32;
                     this.x = centerX + (projX - centerX) * Math.cos(tilt) - (projY - centerY) * Math.sin(tilt);
                     this.y = centerY + (projX - centerX) * Math.sin(tilt) + (projY - centerY) * Math.cos(tilt);
 
-                    this.size = Math.max(0.5, scale * (this.isRung ? 1.5 : 3.5));
+                    this.size = Math.max(0.5, scale * (this.isRung ? 1.4 : 3.2));
                 }
-                
+
                 draw(ctx) {
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                     if (this.isRung) {
-                        ctx.fillStyle = `rgba(204, 255, 0, ${Math.min(1, 0.4 * this.size)})`;
+                        ctx.fillStyle = `rgba(204, 255, 0, ${Math.min(1, 0.45 * this.size)})`;
                     } else {
-                        ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, 0.8 * this.size)})`;
+                        ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, 0.75 * this.size)})`;
                     }
                     ctx.fill();
                 }
@@ -1803,19 +2475,16 @@
                 dnaWidth = dnaCanvas.width = dnaCanvas.offsetWidth;
                 dnaHeight = dnaCanvas.height = dnaCanvas.offsetHeight;
                 dnaParticles = [];
-                
-                for (let y = -300; y < dnaHeight + 300; y += 4) {
+
+                for (let y = -250; y < dnaHeight + 250; y += 4.5) {
                     for (let i = 0; i < 2; i++) dnaParticles.push(new DNAParticle(y, 0, false));
                     for (let i = 0; i < 2; i++) dnaParticles.push(new DNAParticle(y, Math.PI, false));
                 }
-                
-                for (let y = -300; y < dnaHeight + 300; y += 40) {
-                    for (let t = -1; t <= 1; t += 0.1) {
+
+                for (let y = -250; y < dnaHeight + 250; y += 45) {
+                    for (let t = -1; t <= 1; t += 0.12) {
                         for (let i = 0; i < 2; i++) {
                             let p = new DNAParticle(y, t, true);
-                            p.jitterX = (Math.random() - 0.5) * 8;
-                            p.jitterY = (Math.random() - 0.5) * 8;
-                            p.jitterZ = (Math.random() - 0.5) * 8;
                             dnaParticles.push(p);
                         }
                     }
@@ -1823,29 +2492,246 @@
             }
 
             window.addEventListener('resize', () => {
-                if(window.innerWidth > 992 || dnaParticles.length === 0) initDNA();
+                if (window.innerWidth > 992 || dnaParticles.length === 0) initDNA();
             });
 
             function animateDNA(time) {
                 dnaCtx.clearRect(0, 0, dnaWidth, dnaHeight);
-                
                 dnaParticles.sort((a, b) => a.size - b.size);
-                
                 const centerX = dnaWidth / 2;
                 const centerY = dnaHeight / 2;
                 dnaParticles.forEach(p => {
                     p.update(time, centerX, centerY);
                     p.draw(dnaCtx);
                 });
-                
                 requestAnimationFrame(animateDNA);
             }
-            
+
             setTimeout(() => {
                 initDNA();
                 requestAnimationFrame(animateDNA);
-            }, 100);
+            }, 80);
         }
+
+        // Interactive 3D Real Estate Architectural Environment (WebGL-like Wireframe City Engine)
+        const buildingCanvas = document.getElementById('buildingCanvas');
+        if (buildingCanvas) {
+            const bCtx = buildingCanvas.getContext('2d');
+            let bWidth, bHeight;
+            let mouseRotX = 0.35, mouseRotY = 0.7;
+            let targetRotX = 0.35, targetRotY = 0.7;
+
+            function resizeBuildingCanvas() {
+                bWidth = buildingCanvas.width = buildingCanvas.offsetWidth;
+                bHeight = buildingCanvas.height = buildingCanvas.offsetHeight;
+            }
+            window.addEventListener('resize', resizeBuildingCanvas);
+            resizeBuildingCanvas();
+
+            // Track mouse inside container for 3D orbiting
+            const container = buildingCanvas.parentElement;
+            container.addEventListener('mousemove', e => {
+                const rect = container.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                targetRotY = x * 2.2 + 0.7;
+                targetRotX = y * 1.2 + 0.35;
+            });
+
+            // Define 3D Buildings & Towers geometry
+            const buildings = [
+                // Main Highrise Tower
+                { x: 0, z: 0, w: 70, d: 70, h: 220, floors: 16, color: '#ccff00' },
+                // Surrounding Commercial Blocks
+                { x: -90, z: -40, w: 55, d: 55, h: 140, floors: 10, color: '#00f0ff' },
+                { x: 90, z: -30, w: 50, d: 65, h: 160, floors: 12, color: '#ffffff' },
+                { x: -70, z: 75, w: 60, d: 50, h: 100, floors: 7, color: '#ccff00' },
+                { x: 80, z: 70, w: 55, d: 55, h: 125, floors: 9, color: '#00f0ff' }
+            ];
+
+            function project(x, y, z, rotX, rotY) {
+                // Rotate around Y
+                const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+                const x1 = x * cosY - z * sinY;
+                const z1 = z * cosY + x * sinY;
+
+                // Rotate around X
+                const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+                const y2 = y * cosX - z1 * sinX;
+                const z2 = z1 * cosX + y * sinX;
+
+                // Perspective projection
+                const fov = 420;
+                const distance = 480;
+                const scale = fov / (distance + z2);
+
+                return {
+                    x: bWidth / 2 + x1 * scale,
+                    y: bHeight / 2 + 60 + y2 * scale,
+                    z: z2,
+                    scale: scale
+                };
+            }
+
+            function draw3DScene(time) {
+                bCtx.clearRect(0, 0, bWidth, bHeight);
+
+                // Smooth rotation interpolation
+                mouseRotX += (targetRotX - mouseRotX) * 0.08;
+                mouseRotY += (targetRotY + Math.sin(time * 0.0005) * 0.15 - mouseRotY) * 0.08;
+
+                // Draw Ground Grid
+                bCtx.strokeStyle = 'rgba(255, 255, 255, 0.06)';
+                bCtx.lineWidth = 1;
+                const gridSize = 220;
+                const gridStep = 44;
+
+                for (let gx = -gridSize; gx <= gridSize; gx += gridStep) {
+                    const p1 = project(gx, 0, -gridSize, mouseRotX, mouseRotY);
+                    const p2 = project(gx, 0, gridSize, mouseRotX, mouseRotY);
+                    bCtx.beginPath();
+                    bCtx.moveTo(p1.x, p1.y);
+                    bCtx.lineTo(p2.x, p2.y);
+                    bCtx.stroke();
+                }
+
+                for (let gz = -gridSize; gz <= gridSize; gz += gridStep) {
+                    const p1 = project(-gridSize, 0, gz, mouseRotX, mouseRotY);
+                    const p2 = project(gridSize, 0, gz, mouseRotX, mouseRotY);
+                    bCtx.beginPath();
+                    bCtx.moveTo(p1.x, p1.y);
+                    bCtx.lineTo(p2.x, p2.y);
+                    bCtx.stroke();
+                }
+
+                // Render 3D Buildings Wireframes with Floor Lines & Glowing Corner Beams
+                buildings.forEach((bld, idx) => {
+                    const hw = bld.w / 2;
+                    const hd = bld.d / 2;
+
+                    // Base 4 points
+                    const b0 = project(bld.x - hw, 0, bld.z - hd, mouseRotX, mouseRotY);
+                    const b1 = project(bld.x + hw, 0, bld.z - hd, mouseRotX, mouseRotY);
+                    const b2 = project(bld.x + hw, 0, bld.z + hd, mouseRotX, mouseRotY);
+                    const b3 = project(bld.x - hw, 0, bld.z + hd, mouseRotX, mouseRotY);
+
+                    // Top 4 points
+                    const t0 = project(bld.x - hw, -bld.h, bld.z - hd, mouseRotX, mouseRotY);
+                    const t1 = project(bld.x + hw, -bld.h, bld.z - hd, mouseRotX, mouseRotY);
+                    const t2 = project(bld.x + hw, -bld.h, bld.z + hd, mouseRotX, mouseRotY);
+                    const t3 = project(bld.x - hw, -bld.h, bld.z + hd, mouseRotX, mouseRotY);
+
+                    // Building vertical columns
+                    bCtx.lineWidth = idx === 0 ? 1.8 : 1.2;
+                    bCtx.strokeStyle = bld.color === '#ccff00' ? 'rgba(204, 255, 0, 0.7)' : (bld.color === '#00f0ff' ? 'rgba(0, 240, 255, 0.6)' : 'rgba(255, 255, 255, 0.4)');
+
+                    const edges = [
+                        [b0, t0], [b1, t1], [b2, t2], [b3, t3],
+                        [t0, t1], [t1, t2], [t2, t3], [t3, t0]
+                    ];
+
+                    edges.forEach(edge => {
+                        bCtx.beginPath();
+                        bCtx.moveTo(edge[0].x, edge[0].y);
+                        bCtx.lineTo(edge[1].x, edge[1].y);
+                        bCtx.stroke();
+                    });
+
+                    // Floor slices
+                    for (let f = 1; f < bld.floors; f++) {
+                        const fh = (-bld.h / bld.floors) * f;
+                        const f0 = project(bld.x - hw, fh, bld.z - hd, mouseRotX, mouseRotY);
+                        const f1 = project(bld.x + hw, fh, bld.z - hd, mouseRotX, mouseRotY);
+                        const f2 = project(bld.x + hw, fh, bld.z + hd, mouseRotX, mouseRotY);
+                        const f3 = project(bld.x - hw, fh, bld.z + hd, mouseRotX, mouseRotY);
+
+                        bCtx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+                        bCtx.lineWidth = 0.6;
+                        bCtx.beginPath();
+                        bCtx.moveTo(f0.x, f0.y);
+                        bCtx.lineTo(f1.x, f1.y);
+                        bCtx.lineTo(f2.x, f2.y);
+                        bCtx.lineTo(f3.x, f3.y);
+                        bCtx.closePath();
+                        bCtx.stroke();
+                    }
+
+                    // Beacon Top Light for Main Highrise
+                    if (idx === 0) {
+                        const topCenter = project(bld.x, -bld.h, bld.z, mouseRotX, mouseRotY);
+                        bCtx.beginPath();
+                        bCtx.arc(topCenter.x, topCenter.y, 4, 0, Math.PI * 2);
+                        bCtx.fillStyle = '#ccff00';
+                        bCtx.shadowColor = '#ccff00';
+                        bCtx.shadowBlur = 15;
+                        bCtx.fill();
+                        bCtx.shadowBlur = 0;
+                    }
+                });
+
+                requestAnimationFrame(draw3DScene);
+            }
+
+            requestAnimationFrame(draw3DScene);
+        }
+
+        // Interactive ROI & Revenue Calculator Logic
+        function calculateROI() {
+            const bizType = document.getElementById('bizType').value;
+            const volume = parseInt(document.getElementById('clientScale').value, 10);
+            document.getElementById('volumeLabel').innerText = `${volume} Inquiries/mo`;
+
+            const chkWeb = document.getElementById('chkWeb').checked;
+            const chkSeo = document.getElementById('chkSeo').checked;
+            const chk3d = document.getElementById('chk3d').checked;
+            const chkEmail = document.getElementById('chkEmail').checked;
+            const chkLead = document.getElementById('chkLead').checked;
+            const chkWa = document.getElementById('chkWa').checked;
+
+            let baseMultiplier = 1800; // Average transaction value baseline
+            let conversionBoost = 0.05; // Baseline 5% conversion
+            let hoursMultiplier = 0.6;
+
+            if (bizType === 'realestate') {
+                baseMultiplier = 22000; // Real estate token booking value
+                conversionBoost = 0.02;
+                hoursMultiplier = 0.9;
+            } else if (bizType === 'b2b') {
+                baseMultiplier = 8500;
+                conversionBoost = 0.04;
+                hoursMultiplier = 1.1;
+            } else if (bizType === 'hospitality') {
+                baseMultiplier = 1400;
+                conversionBoost = 0.08;
+                hoursMultiplier = 0.7;
+            }
+
+            let servicePower = 1.0;
+            let totalHours = 20;
+
+            if (chkWeb) { servicePower += 0.25; totalHours += 15; }
+            if (chkSeo) { servicePower += 0.35; totalHours += 18; }
+            if (chk3d) { servicePower += 0.45; totalHours += 20; }
+            if (chkEmail) { servicePower += 0.20; totalHours += 12; }
+            if (chkLead) { servicePower += 0.40; totalHours += 25; }
+            if (chkWa) { servicePower += 0.30; totalHours += 22; }
+
+            const projectedMonthlyRevenue = Math.round(volume * baseMultiplier * conversionBoost * servicePower);
+            const calculatedHours = Math.round(totalHours + (volume * hoursMultiplier));
+
+            // Format as Indian Currency (INR)
+            const formattedRev = new Intl.NumberFormat('en-IN', {
+                style: 'currency',
+                currency: 'INR',
+                maximumFractionDigits: 0
+            }).format(projectedMonthlyRevenue);
+
+            document.getElementById('revenueImpact').innerText = formattedRev;
+            document.getElementById('hoursSaved').innerText = `${calculatedHours}+ Hours`;
+        }
+
+        // Initialize ROI Calculator on load
+        calculateROI();
     </script>
 </body>
 

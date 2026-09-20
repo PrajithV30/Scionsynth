@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Business Profile Setup & Local SEO Dominance | Scionsynth</title>
+    <meta name="description"
+        content="Dominate Google Maps Top 3 Pack, automated review generation engines, local keyword citations, and geo-targeted location landing pages for physical businesses.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+        @import url('https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap');
+
+        :root {
+            --bg-color: #050505;
+            --surface: #0e0e0e;
+            --surface-card: #121212;
+            --surface-border: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-muted: #9a9a9a;
+            --accent: #ccff00;
+            --accent-glow: rgba(204, 255, 0, 0.28);
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+            --font-accent: 'Clash Display', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: var(--font-body); overflow-x: hidden; line-height: 1.6; }
+
+        .ambient-glow { position: fixed; width: 55vw; height: 55vw; border-radius: 50%; filter: blur(140px); z-index: -3; pointer-events: none; }
+        .ambient-glow-1 { top: -15vh; left: -10vw; background: radial-gradient(circle, rgba(204, 255, 0, 0.08), transparent 70%); }
+        .ambient-glow-2 { bottom: -20vh; right: -10vw; background: radial-gradient(circle, rgba(255, 170, 0, 0.05), transparent 70%); }
+
+        .noise-overlay { position: fixed; inset: 0; pointer-events: none; z-index: 9998; opacity: 0.035; mix-blend-mode: overlay; background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
+
+        .cursor-dot { position: fixed; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 10000; transform: translate(-50%, -50%); transition: width 0.25s, height 0.25s; box-shadow: 0 0 12px var(--accent-glow); }
+        .cursor-ring { position: fixed; width: 42px; height: 42px; border: 1px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s; opacity: 0.4; }
+        body.hovering .cursor-dot { width: 52px; height: 52px; background: var(--accent); mix-blend-mode: exclusion; }
+        body.hovering .cursor-ring { width: 72px; height: 72px; opacity: 0; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+        section { padding: 6.5rem 0; position: relative; }
+        h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; }
+        .text-accent { color: var(--accent); font-family: var(--font-accent); }
+        .text-muted { color: var(--text-muted); }
+
+        .badge-tag {
+            display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.9rem; border-radius: 100px;
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; background: rgba(204, 255, 0, 0.08);
+            border: 1px solid rgba(204, 255, 0, 0.25); color: var(--accent); width: fit-content; margin-bottom: 1rem;
+        }
+
+        nav {
+            position: fixed; top: 1.2rem; left: 50%; width: 94%; max-width: 1100px;
+            transform: translateX(-50%); padding: 0.75rem 1.4rem; display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; border-radius: 100px; background: rgba(8, 8, 8, 0.85); backdrop-filter: blur(18px); border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+        .logo { font-family: var(--font-display); font-size: 1.35rem; font-weight: 800; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+        .logo-symbol { width: 24px; height: 24px; background: var(--accent); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 900; color: #000; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 1.8rem; }
+        .nav-links a { font-size: 0.82rem; font-weight: 600; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+            padding: 0.9rem 2.2rem; background: linear-gradient(90deg, var(--accent), #76ff03);
+            color: #000; border: none; font-size: 0.92rem; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 0.05em; text-decoration: none; border-radius: 8px; transition: all 0.35s; box-shadow: 0 0 25px rgba(204, 255, 0, 0.5);
+        }
+        .btn:hover { transform: translateY(-2px) scale(1.02); }
+        .btn-outline { background: rgba(255, 255, 255, 0.03); color: #fff; border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: none; }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: rgba(204, 255, 0, 0.05); }
+
+        .page-hero { padding-top: 10rem; padding-bottom: 4rem; position: relative; }
+        .page-hero h1 { font-size: clamp(2.4rem, 5vw, 4.2rem); margin-bottom: 1.5rem; line-height: 1.1; }
+        .page-hero p.lead { font-size: 1.2rem; color: var(--text-muted); max-width: 780px; line-height: 1.7; margin-bottom: 2.5rem; }
+
+        /* Map Pack Simulation Box */
+        .map-pack-box {
+            background: var(--surface-card); border: 1px solid rgba(204, 255, 0, 0.3);
+            border-radius: 20px; padding: 2.5rem; display: grid; grid-template-columns: 1.1fr 1fr;
+            gap: 2.5rem; align-items: center; margin-top: 2rem;
+        }
+
+        .map-mockup {
+            background: #080808; border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;
+        }
+        .map-result-item {
+            background: #141414; border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px; padding: 1rem 1.2rem; display: flex; justify-content: space-between; align-items: center;
+        }
+        .map-result-item.top-rank {
+            border-color: var(--accent); background: rgba(204, 255, 0, 0.05);
+            box-shadow: 0 0 20px rgba(204, 255, 0, 0.1);
+        }
+        .map-rank-badge {
+            width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+            color: #000; font-weight: 800; font-size: 0.85rem; display: flex; align-items: center; justify-content: center;
+        }
+
+        /* Economics Card */
+        .economics-banner {
+            background: #090909; border: 1px solid var(--surface-border);
+            border-radius: 16px; padding: 2rem; margin-top: 3.5rem;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+        }
+        .econ-stat-title { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .econ-stat-val { font-family: var(--font-accent); font-size: 1.8rem; font-weight: 700; color: var(--accent); }
+
+        .strategy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem; }
+        .strat-card { background: var(--surface-card); border: 1px solid var(--surface-border); border-radius: 16px; padding: 2rem; }
+        .strat-card h3 { font-size: 1.25rem; margin-bottom: 0.8rem; }
+        .strat-card p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; }
+
+        footer { padding: 4rem 5% 2rem; border-top: 1px solid rgba(255, 255, 255, 0.04); background: #040404; text-align: center; }
+
+        @media (max-width: 900px) {
+            .map-pack-box, .strategy-grid, .economics-banner { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="noise-overlay"></div>
+    <div class="ambient-glow ambient-glow-1"></div>
+    <div class="ambient-glow ambient-glow-2"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <nav>
+        <a href="index.html" class="logo clickable">
+            <div class="logo-symbol">S</div>
+            SCION<span>SYNTH</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="clickable">Home</a>
+            <a href="web-development.html" class="clickable">Web Dev</a>
+            <a href="real-estate-3d.html" class="clickable">3D Buildings</a>
+            <a href="google-business-seo.html" class="clickable active">SEO & Maps</a>
+            <a href="email-marketing.html" class="clickable">Email Flows</a>
+            <a href="whatsapp-automation.html" class="clickable">WhatsApp</a>
+            <a href="b2b-lead-research.html" class="clickable">B2B Leads</a>
+        </div>
+        <a href="index.html#contact" class="btn clickable" style="padding: 0.6rem 1.4rem; font-size: 0.82rem;">Book Audit</a>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="badge-tag">Service Specification · 03</div>
+            <h1>Google Business Setup & <span class="text-accent">Hyperlocal SEO</span></h1>
+            <p class="lead">
+                When nearby customers search "best showroom near me" or "top real estate developer in city", your business must claim the coveted Google Maps #1 spot. We optimize your profiles, reviews, local citations, and geo-targeted landing pages to drive steady, high-intent footfall and incoming phone inquiries.
+            </p>
+            <div style="display: flex; gap: 1.2rem; flex-wrap: wrap;">
+                <a href="index.html#contact" class="btn clickable">Claim Map Pack Audit</a>
+                <a href="#economics" class="btn btn-outline clickable">View Pricing & Economics</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Pack Simulation -->
+    <section style="background: #090909; border-top: 1px solid var(--surface-border); border-bottom: 1px solid var(--surface-border);">
+        <div class="container">
+            <div class="badge-tag">Local Visibility Dominance</div>
+            <h2>Google Maps <span class="text-accent">Top 3 Ranking Engine</span></h2>
+
+            <div class="map-pack-box">
+                <div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">Own The Local Search Pack</h3>
+                    <p class="text-muted" style="line-height: 1.6; margin-bottom: 1.5rem;">
+                        Over 78% of local physical store visits start on Google Maps. If your profile lacks verified citations, consistent keyword geotagging, or active review velocity, you are giving away thousands in daily revenue to lesser competitors.
+                    </p>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.7rem; color: #d0d0d0; font-size: 0.9rem;">
+                        <li><strong style="color: var(--accent);">✓</strong> 100% Verified Profile Setup & Category Clustering</li>
+                        <li><strong style="color: var(--accent);">✓</strong> Automated QR Code & WhatsApp 5-Star Review Funnel</li>
+                        <li><strong style="color: var(--accent);">✓</strong> Geotagged Image Uploads & Weekly Local Post Scheduling</li>
+                    </ul>
+                </div>
+
+                <div class="map-mockup">
+                    <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+                        <span>GOOGLE MAPS RESULTS (NEARBY)</span>
+                        <span style="color: var(--accent);">LIVE AUDIT</span>
+                    </div>
+
+                    <div class="map-result-item top-rank">
+                        <div style="display: flex; align-items: center; gap: 0.8rem;">
+                            <div class="map-rank-badge">#1</div>
+                            <div>
+                                <div style="font-weight: 700; font-size: 0.95rem;">Your Brand Showroom (Optimized)</div>
+                                <div style="font-size: 0.8rem; color: #ffb703;">★★★★★ 4.9 (248 Reviews)</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--accent);">+340% CALLS</div>
+                    </div>
+
+                    <div class="map-result-item">
+                        <div style="display: flex; align-items: center; gap: 0.8rem;">
+                            <div class="map-rank-badge" style="background: #333; color: #aaa;">#2</div>
+                            <div>
+                                <div style="font-weight: 600; font-size: 0.9rem; color: #aaa;">Unoptimized Competitor A</div>
+                                <div style="font-size: 0.78rem; color: #888;">★★★★☆ 4.1 (32 Reviews)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="map-result-item">
+                        <div style="display: flex; align-items: center; gap: 0.8rem;">
+                            <div class="map-rank-badge" style="background: #333; color: #aaa;">#3</div>
+                            <div>
+                                <div style="font-weight: 600; font-size: 0.9rem; color: #aaa;">Legacy Store B</div>
+                                <div style="font-size: 0.78rem; color: #888;">★★★☆☆ 3.8 (14 Reviews)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Economics Breakdown -->
+            <div class="economics-banner" id="economics">
+                <div>
+                    <div class="econ-stat-title">Monthly Retainer</div>
+                    <div class="econ-stat-val">₹10k–₹25k</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Per client / location</div>
+                </div>
+                <div>
+                    <div class="econ-stat-title">Target Goal (₹1L–₹5L MRR)</div>
+                    <div class="econ-stat-val" style="color: #fff;">4–20 Clients</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Scalable recurring book</div>
+                </div>
+                <div>
+                    <div class="econ-stat-title">Execution Complexity</div>
+                    <div class="econ-stat-val" style="color: #fff;">Medium</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Rigorous initial setup</div>
+                </div>
+                <div>
+                    <div class="econ-stat-title">Post-Setup Maintenance</div>
+                    <div class="econ-stat-val" style="color: #25d366;">Low Friction</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Automated upkeep protocol</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategy Pillars -->
+    <section>
+        <div class="container">
+            <div class="badge-tag">Our 360° Methodology</div>
+            <h2>Everything We Manage For <span class="text-accent">Local Dominance</span></h2>
+
+            <div class="strategy-grid">
+                <div class="strat-card">
+                    <h3>1. NAP Consistency & Local Citations</h3>
+                    <p>We audit and synchronize your Name, Address, and Phone number across 80+ top directories (JustDial, IndiaMart, Sulekha, Bing, Apple Maps, YellowPages).</p>
+                </div>
+                <div class="strat-card">
+                    <h3>2. Automated 5-Star Review Funnel</h3>
+                    <p>Post-purchase SMS and WhatsApp triggers asking satisfied customers for 5-star Google ratings with direct pre-filled review links.</p>
+                </div>
+                <div class="strat-card">
+                    <h3>3. Geo-Targeted City Landing Pages</h3>
+                    <p>We create dedicated, high-speed landing pages optimized for "service in [Neighborhood / City]" to dominate Google organic web search.</p>
+                </div>
+                <div class="strat-card">
+                    <h3>4. Monthly Spam Fighting & Competitor Audits</h3>
+                    <p>We monitor and report fraudulent competitor keyword-stuffed listings, moving your verified profile directly up into the Top 3 slots.</p>
+                </div>
+                <div class="strat-card">
+                    <h3>5. Schema Markup & Local Pack Code</h3>
+                    <p>Embedded LocalBusiness JSON-LD markup on your website indicating precise GPS coordinates, opening hours, and accepted payment types.</p>
+                </div>
+                <div class="strat-card">
+                    <h3>6. Monthly Ranking & Inbound Call Reports</h3>
+                    <p>Crystal clear monthly PDF dashboards showing total phone calls, driving directions requested, and website clicks generated directly by Google.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 4rem;">
+                <a href="index.html#contact" class="btn clickable">Book Local SEO Audit Call</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p style="color: var(--text-muted); font-size: 0.9rem;">&copy; 2026 Scionsynth. Local Search Optimization & Reputation Infrastructure.</p>
+            <p style="margin-top: 0.5rem;"><a href="index.html" class="clickable text-accent" style="text-decoration: none;">&larr; Back to Main Platform</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorRing = document.querySelector('.cursor-ring');
+        document.addEventListener('mousemove', e => {
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+            setTimeout(() => {
+                cursorRing.style.left = e.clientX + 'px';
+                cursorRing.style.top = e.clientY + 'px';
+            }, 45);
+        });
+
+        document.querySelectorAll('.clickable, a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        });
+    </script>
+</body>
+</html>

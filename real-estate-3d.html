@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate 3D Buildings & Interactive Spatial Environments | Scionsynth</title>
+    <meta name="description"
+        content="Convert architectural blueprints and property developments into interactive, web-based 3D digital twins and virtual walkthroughs without plugins.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+        @import url('https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap');
+
+        :root {
+            --bg-color: #050505;
+            --surface: #0e0e0e;
+            --surface-card: #121212;
+            --surface-border: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-muted: #9a9a9a;
+            --accent: #ccff00;
+            --accent-cyan: #00f0ff;
+            --accent-glow: rgba(204, 255, 0, 0.28);
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+            --font-accent: 'Clash Display', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --ease-main: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: var(--bg-color); color: var(--text-main);
+            font-family: var(--font-body); overflow-x: hidden; line-height: 1.6;
+        }
+
+        .ambient-glow {
+            position: fixed; width: 55vw; height: 55vw; border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.08) 0%, rgba(204, 255, 0, 0.04) 50%, transparent 70%);
+            filter: blur(140px); z-index: -3; pointer-events: none;
+        }
+        .ambient-glow-1 { top: -15vh; left: -10vw; }
+        .ambient-glow-2 { bottom: -20vh; right: -10vw; }
+
+        .noise-overlay {
+            position: fixed; inset: 0; pointer-events: none; z-index: 9998; opacity: 0.035; mix-blend-mode: overlay;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .cursor-dot {
+            position: fixed; width: 8px; height: 8px; background: var(--accent-cyan);
+            border-radius: 50%; pointer-events: none; z-index: 10000;
+            transform: translate(-50%, -50%); transition: width 0.25s, height 0.25s;
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+        }
+        .cursor-ring {
+            position: fixed; width: 42px; height: 42px; border: 1px solid var(--accent-cyan);
+            border-radius: 50%; pointer-events: none; z-index: 9999;
+            transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s; opacity: 0.4;
+        }
+        body.hovering .cursor-dot { width: 52px; height: 52px; background: var(--accent-cyan); mix-blend-mode: exclusion; }
+        body.hovering .cursor-ring { width: 72px; height: 72px; opacity: 0; }
+
+        .container { max-width: 1240px; margin: 0 auto; padding: 0 5%; }
+        section { padding: 6.5rem 0; position: relative; }
+
+        h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; }
+        .text-accent { color: var(--accent); font-family: var(--font-accent); }
+        .text-cyan { color: var(--accent-cyan); text-shadow: 0 0 20px rgba(0, 240, 255, 0.4); font-family: var(--font-accent); }
+        .text-muted { color: var(--text-muted); }
+
+        .badge-tag {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.35rem 0.9rem; border-radius: 100px;
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.08em; background: rgba(0, 240, 255, 0.08);
+            border: 1px solid rgba(0, 240, 255, 0.25); color: var(--accent-cyan);
+            width: fit-content; margin-bottom: 1rem;
+        }
+
+        nav {
+            position: fixed; top: 1.2rem; left: 50%; width: 94%; max-width: 1100px;
+            transform: translateX(-50%); padding: 0.75rem 1.4rem;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; border-radius: 100px; background: rgba(8, 8, 8, 0.85);
+            backdrop-filter: blur(18px); border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+        .logo { font-family: var(--font-display); font-size: 1.35rem; font-weight: 800; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+        .logo-symbol { width: 24px; height: 24px; background: var(--accent); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 900; color: #000; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 1.8rem; }
+        .nav-links a { font-size: 0.82rem; font-weight: 600; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent-cyan); }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+            padding: 0.9rem 2.2rem; background: linear-gradient(90deg, var(--accent-cyan), #00a8ff);
+            color: #000; border: none; font-size: 0.92rem; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none;
+            border-radius: 8px; transition: all 0.35s; box-shadow: 0 0 25px rgba(0, 240, 255, 0.5);
+        }
+        .btn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 0 35px rgba(0, 240, 255, 0.8); }
+        .btn-outline { background: rgba(255, 255, 255, 0.03); color: #fff; border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: none; }
+        .btn-outline:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); background: rgba(0, 240, 255, 0.05); }
+
+        .page-hero { padding-top: 10rem; padding-bottom: 4rem; position: relative; }
+        .page-hero h1 { font-size: clamp(2.4rem, 5vw, 4.2rem); margin-bottom: 1.5rem; line-height: 1.1; }
+        .page-hero p.lead { font-size: 1.2rem; color: var(--text-muted); max-width: 780px; line-height: 1.7; margin-bottom: 2.5rem; }
+
+        /* Full 3D Interactive Showcase Studio */
+        .showcase-studio {
+            background: #080808; border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 20px; overflow: hidden; position: relative;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 240, 255, 0.08);
+            margin-top: 2rem;
+        }
+        .studio-toolbar {
+            padding: 1rem 1.5rem; background: rgba(14, 14, 14, 0.9);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 1rem;
+        }
+        .studio-controls { display: flex; gap: 0.8rem; align-items: center; }
+        .studio-btn {
+            background: #1a1a1a; border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #fff; padding: 0.45rem 1rem; border-radius: 6px;
+            font-size: 0.8rem; font-family: var(--font-mono); cursor: pointer; transition: all 0.2s;
+        }
+        .studio-btn:hover, .studio-btn.active { background: var(--accent-cyan); color: #000; border-color: var(--accent-cyan); font-weight: 700; }
+        
+        .viewport-3d { width: 100%; height: 520px; position: relative; background: radial-gradient(circle at center, #0e1215 0%, #050505 100%); }
+        canvas#studioCanvas { width: 100%; height: 100%; display: block; }
+        
+        .hud-overlay {
+            position: absolute; bottom: 20px; left: 20px;
+            background: rgba(8, 8, 8, 0.75); backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 240, 255, 0.2); border-radius: 10px;
+            padding: 1rem 1.4rem; font-family: var(--font-mono); font-size: 0.82rem; color: #d0d0d0;
+            display: flex; flex-direction: column; gap: 0.3rem; pointer-events: none;
+        }
+
+        /* Features & Use Cases */
+        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem; }
+        .feature-card {
+            background: var(--surface-card); border: 1px solid var(--surface-border);
+            border-radius: 16px; padding: 2.2rem; transition: all 0.3s;
+        }
+        .feature-card:hover { border-color: var(--accent-cyan); transform: translateY(-4px); }
+        .feature-icon { font-size: 2.2rem; margin-bottom: 1rem; display: inline-block; }
+        .feature-card h3 { font-size: 1.3rem; margin-bottom: 0.8rem; }
+        .feature-card p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; }
+
+        footer { padding: 4rem 5% 2rem; border-top: 1px solid rgba(255, 255, 255, 0.04); background: #040404; text-align: center; }
+
+        @media (max-width: 900px) {
+            .features-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .viewport-3d { height: 380px; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="noise-overlay"></div>
+    <div class="ambient-glow ambient-glow-1"></div>
+    <div class="ambient-glow ambient-glow-2"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <nav>
+        <a href="index.html" class="logo clickable">
+            <div class="logo-symbol">S</div>
+            SCION<span>SYNTH</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="clickable">Home</a>
+            <a href="web-development.html" class="clickable">Web Dev</a>
+            <a href="real-estate-3d.html" class="clickable active">3D Buildings</a>
+            <a href="google-business-seo.html" class="clickable">SEO & Maps</a>
+            <a href="email-marketing.html" class="clickable">Email Flows</a>
+            <a href="whatsapp-automation.html" class="clickable">WhatsApp</a>
+            <a href="b2b-lead-research.html" class="clickable">B2B Leads</a>
+        </div>
+        <a href="index.html#contact" class="btn clickable" style="padding: 0.6rem 1.4rem; font-size: 0.82rem;">Book Audit</a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="badge-tag">Service Specification · 02</div>
+            <h1>Real Estate <span class="text-cyan">3D Buildings</span> & Interactive Worlds</h1>
+            <p class="lead">
+                Ditch flat 2D brochures and static PDFs. We construct hyper-immersive, zero-plugin WebGL 3D architectural environments that let prospective home buyers, commercial investors, and NRI clients explore floor plans, sunlight exposure, and building units interactively from their phones or laptops.
+            </p>
+            <div style="display: flex; gap: 1.2rem; flex-wrap: wrap;">
+                <a href="#interactive-demo" class="btn clickable">Test 3D Interactive Engine</a>
+                <a href="index.html#contact" class="btn btn-outline clickable">Commission 3D Project</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive 3D Showcase Studio -->
+    <section id="interactive-demo" style="background: #090909; border-top: 1px solid var(--surface-border); border-bottom: 1px solid var(--surface-border);">
+        <div class="container">
+            <div class="badge-tag">Live Spatial Demonstration</div>
+            <h2>Interactive 3D Architectural <span class="text-cyan">Visualizer</span></h2>
+            <p class="text-muted" style="max-width: 650px; margin-top: 0.5rem;">
+                Click and drag to rotate the tower in 3D space. Switch modes below to inspect wireframe geometry, floor isolates, or night lighting rendering.
+            </p>
+
+            <div class="showcase-studio">
+                <div class="studio-toolbar">
+                    <div style="display: flex; align-items: center; gap: 0.8rem;">
+                        <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-cyan);">● SPATIAL ENGINE: 60FPS</span>
+                    </div>
+                    <div class="studio-controls">
+                        <button class="studio-btn active clickable" onclick="setMode('full', this)">Commercial Complex</button>
+                        <button class="studio-btn clickable" onclick="setMode('floors', this)">Floor Slice Mode</button>
+                        <button class="studio-btn clickable" onclick="setMode('wireframe', this)">Wireframe Cad</button>
+                    </div>
+                </div>
+
+                <div class="viewport-3d">
+                    <canvas id="studioCanvas"></canvas>
+                    <div class="hud-overlay">
+                        <div><strong style="color: var(--accent-cyan);">TOWER:</strong> Scion Horizon Tower Alpha</div>
+                        <div><strong>ELEVATION:</strong> 48 Floors · Mixed Retail & Penthouse Units</div>
+                        <div><strong>CONTROLS:</strong> Drag to Orbit · Real-Time WebGL Matrix</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Capabilities & Use Cases -->
+    <section>
+        <div class="container">
+            <div class="badge-tag">Why Developers Choose 3D</div>
+            <h2>Transforming Property <span class="text-cyan">Sales Velocity</span></h2>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Global NRI & Remote Sales</h3>
+                    <p>NRI and out-of-city buyers can walk through luxury apartments and commercial towers with realistic lighting, boosting remote booking confidence by 300%.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Zero App Installs Needed</h3>
+                    <p>Loads instantly in under 2 seconds directly in Safari, Chrome, and WhatsApp browser views. No heavyweight Unreal Engine downloads or VR goggles needed.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏢</div>
+                    <h3>Interactive Unit Availability</h3>
+                    <p>Connect unit floor plans to real-time sales databases. Click any floor to see square footage, pricing, sold status, and 3D interior renders.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">☀️</div>
+                    <h3>Solar & Sunlight Simulation</h3>
+                    <p>Show prospective buyers exactly how natural sunlight and shadow dynamics fall across their balconies during morning and evening hours.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📍</div>
+                    <h3>Surrounding Infrastructure Map</h3>
+                    <p>Integrate 3D neighborhood context showing nearby metro stations, airports, expressways, and commercial hubs in interactive 3D.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>High-Ticket Booking Conversions</h3>
+                    <p>Developers using interactive 3D spatial environments see a 4.2× increase in qualified inquiry-to-visit conversion rates.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 4.5rem;">
+                <a href="index.html#contact" class="btn clickable">Book a 3D Environment Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p style="color: var(--text-muted); font-size: 0.9rem;">&copy; 2026 Scionsynth. 3D Spatial Computing & Real Estate Technologies.</p>
+            <p style="margin-top: 0.5rem;"><a href="index.html" class="clickable text-accent" style="text-decoration: none;">&larr; Back to Main Platform</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorRing = document.querySelector('.cursor-ring');
+        document.addEventListener('mousemove', e => {
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+            setTimeout(() => {
+                cursorRing.style.left = e.clientX + 'px';
+                cursorRing.style.top = e.clientY + 'px';
+            }, 45);
+        });
+
+        document.querySelectorAll('.clickable, a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        });
+
+        // 3D Canvas Studio Logic
+        const canvas = document.getElementById('studioCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let rotX = 0.35, rotY = 0.8;
+        let targetRotX = 0.35, targetRotY = 0.8;
+        let isDragging = false;
+        let prevMouseX = 0, prevMouseY = 0;
+        let currentMode = 'full';
+
+        function resize() {
+            width = canvas.width = canvas.offsetWidth;
+            height = canvas.height = canvas.offsetHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        canvas.addEventListener('mousedown', e => {
+            isDragging = true;
+            prevMouseX = e.clientX;
+            prevMouseY = e.clientY;
+        });
+        window.addEventListener('mouseup', () => isDragging = false);
+        window.addEventListener('mousemove', e => {
+            if (!isDragging) return;
+            const dx = e.clientX - prevMouseX;
+            const dy = e.clientY - prevMouseY;
+            targetRotY += dx * 0.008;
+            targetRotX += dy * 0.008;
+            prevMouseX = e.clientX;
+            prevMouseY = e.clientY;
+        });
+
+        function setMode(mode, btn) {
+            currentMode = mode;
+            document.querySelectorAll('.studio-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        const complex = [
+            { x: 0, z: 0, w: 85, d: 85, h: 260, floors: 22, color: '#00f0ff' },
+            { x: -110, z: -50, w: 65, d: 65, h: 180, floors: 14, color: '#ccff00' },
+            { x: 105, z: -40, w: 60, d: 75, h: 200, floors: 16, color: '#ffffff' },
+            { x: -85, z: 85, w: 70, d: 60, h: 130, floors: 10, color: '#00f0ff' },
+            { x: 95, z: 80, w: 65, d: 65, h: 150, floors: 12, color: '#ccff00' }
+        ];
+
+        function project(x, y, z) {
+            const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+            const x1 = x * cosY - z * sinY;
+            const z1 = z * cosY + x * sinY;
+
+            const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+            const y2 = y * cosX - z1 * sinX;
+            const z2 = z1 * cosX + y * sinX;
+
+            const fov = 480;
+            const distance = 520;
+            const scale = fov / (distance + z2);
+
+            return {
+                x: width / 2 + x1 * scale,
+                y: height / 2 + 80 + y2 * scale,
+                scale: scale
+            };
+        }
+
+        function draw(time) {
+            ctx.clearRect(0, 0, width, height);
+            rotX += (targetRotX - rotX) * 0.1;
+            rotY += (targetRotY - rotY) * 0.1;
+
+            if (!isDragging) {
+                targetRotY += 0.002;
+            }
+
+            // Ground grid
+            ctx.strokeStyle = 'rgba(0, 240, 255, 0.07)';
+            ctx.lineWidth = 1;
+            const sz = 260, st = 40;
+            for (let x = -sz; x <= sz; x += st) {
+                const p1 = project(x, 0, -sz), p2 = project(x, 0, sz);
+                ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
+            }
+            for (let z = -sz; z <= sz; z += st) {
+                const p1 = project(-sz, 0, z), p2 = project(sz, 0, z);
+                ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
+            }
+
+            // Draw 3D structures
+            complex.forEach((bld, idx) => {
+                if (currentMode === 'floors' && idx !== 0) return; // Isolate main tower in floor slice mode
+
+                const hw = bld.w / 2, hd = bld.d / 2;
+                const b0 = project(bld.x - hw, 0, bld.z - hd);
+                const b1 = project(bld.x + hw, 0, bld.z - hd);
+                const b2 = project(bld.x + hw, 0, bld.z + hd);
+                const b3 = project(bld.x - hw, 0, bld.z + hd);
+
+                const t0 = project(bld.x - hw, -bld.h, bld.z - hd);
+                const t1 = project(bld.x + hw, -bld.h, bld.z - hd);
+                const t2 = project(bld.x + hw, -bld.h, bld.z + hd);
+                const t3 = project(bld.x - hw, -bld.h, bld.z + hd);
+
+                ctx.lineWidth = idx === 0 ? 2 : 1.2;
+                ctx.strokeStyle = bld.color === '#00f0ff' ? 'rgba(0, 240, 255, 0.8)' : (bld.color === '#ccff00' ? 'rgba(204, 255, 0, 0.8)' : 'rgba(255, 255, 255, 0.5)');
+
+                const edges = [
+                    [b0, t0], [b1, t1], [b2, t2], [b3, t3],
+                    [t0, t1], [t1, t2], [t2, t3], [t3, t0]
+                ];
+                edges.forEach(e => {
+                    ctx.beginPath(); ctx.moveTo(e[0].x, e[0].y); ctx.lineTo(e[1].x, e[1].y); ctx.stroke();
+                });
+
+                // Floor slices
+                const floorsCount = currentMode === 'floors' ? 30 : bld.floors;
+                for (let f = 1; f < floorsCount; f++) {
+                    const fh = (-bld.h / floorsCount) * f;
+                    const f0 = project(bld.x - hw, fh, bld.z - hd);
+                    const f1 = project(bld.x + hw, fh, bld.z - hd);
+                    const f2 = project(bld.x + hw, fh, bld.z + hd);
+                    const f3 = project(bld.x - hw, fh, bld.z + hd);
+
+                    ctx.strokeStyle = currentMode === 'wireframe' ? 'rgba(0, 240, 255, 0.3)' : 'rgba(255, 255, 255, 0.15)';
+                    ctx.lineWidth = 0.7;
+                    ctx.beginPath();
+                    ctx.moveTo(f0.x, f0.y); ctx.lineTo(f1.x, f1.y); ctx.lineTo(f2.x, f2.y); ctx.lineTo(f3.x, f3.y);
+                    ctx.closePath(); ctx.stroke();
+                }
+
+                // Top rooftop heli-pad / beacon
+                if (idx === 0) {
+                    const topC = project(bld.x, -bld.h, bld.z);
+                    ctx.beginPath(); ctx.arc(topC.x, topC.y, 4, 0, Math.PI * 2);
+                    ctx.fillStyle = '#00f0ff'; ctx.shadowColor = '#00f0ff'; ctx.shadowBlur = 20; ctx.fill(); ctx.shadowBlur = 0;
+                }
+            });
+
+            requestAnimationFrame(draw);
+        }
+        requestAnimationFrame(draw);
+    </script>
+</body>
+</html>

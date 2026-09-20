@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Marketing & Lifecycle Automation | Scionsynth</title>
+    <meta name="description"
+        content="High-converting newsletters, automated abandoned cart recovery, welcome sequences, and customer retention flows for physical & modern brands.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+        @import url('https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap');
+
+        :root {
+            --bg-color: #050505;
+            --surface: #0e0e0e;
+            --surface-card: #121212;
+            --surface-border: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-muted: #9a9a9a;
+            --accent: #ccff00;
+            --accent-glow: rgba(204, 255, 0, 0.28);
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+            --font-accent: 'Clash Display', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: var(--font-body); overflow-x: hidden; line-height: 1.6; }
+
+        .ambient-glow { position: fixed; width: 55vw; height: 55vw; border-radius: 50%; filter: blur(140px); z-index: -3; pointer-events: none; }
+        .ambient-glow-1 { top: -15vh; left: -10vw; background: radial-gradient(circle, rgba(204, 255, 0, 0.08), transparent 70%); }
+        .ambient-glow-2 { bottom: -20vh; right: -10vw; background: radial-gradient(circle, rgba(255, 0, 128, 0.04), transparent 70%); }
+
+        .noise-overlay { position: fixed; inset: 0; pointer-events: none; z-index: 9998; opacity: 0.035; mix-blend-mode: overlay; background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
+
+        .cursor-dot { position: fixed; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 10000; transform: translate(-50%, -50%); transition: width 0.25s, height 0.25s; box-shadow: 0 0 12px var(--accent-glow); }
+        .cursor-ring { position: fixed; width: 42px; height: 42px; border: 1px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s; opacity: 0.4; }
+        body.hovering .cursor-dot { width: 52px; height: 52px; background: var(--accent); mix-blend-mode: exclusion; }
+        body.hovering .cursor-ring { width: 72px; height: 72px; opacity: 0; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+        section { padding: 6.5rem 0; position: relative; }
+        h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; }
+        .text-accent { color: var(--accent); font-family: var(--font-accent); }
+        .text-muted { color: var(--text-muted); }
+
+        .badge-tag {
+            display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.9rem; border-radius: 100px;
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; background: rgba(204, 255, 0, 0.08);
+            border: 1px solid rgba(204, 255, 0, 0.25); color: var(--accent); width: fit-content; margin-bottom: 1rem;
+        }
+
+        nav {
+            position: fixed; top: 1.2rem; left: 50%; width: 94%; max-width: 1100px;
+            transform: translateX(-50%); padding: 0.75rem 1.4rem; display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; border-radius: 100px; background: rgba(8, 8, 8, 0.85); backdrop-filter: blur(18px); border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+        .logo { font-family: var(--font-display); font-size: 1.35rem; font-weight: 800; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+        .logo-symbol { width: 24px; height: 24px; background: var(--accent); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 900; color: #000; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 1.8rem; }
+        .nav-links a { font-size: 0.82rem; font-weight: 600; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+            padding: 0.9rem 2.2rem; background: linear-gradient(90deg, var(--accent), #76ff03);
+            color: #000; border: none; font-size: 0.92rem; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 0.05em; text-decoration: none; border-radius: 8px; transition: all 0.35s; box-shadow: 0 0 25px rgba(204, 255, 0, 0.5);
+        }
+        .btn:hover { transform: translateY(-2px) scale(1.02); }
+        .btn-outline { background: rgba(255, 255, 255, 0.03); color: #fff; border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: none; }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: rgba(204, 255, 0, 0.05); }
+
+        .page-hero { padding-top: 10rem; padding-bottom: 4rem; position: relative; }
+        .page-hero h1 { font-size: clamp(2.4rem, 5vw, 4.2rem); margin-bottom: 1.5rem; line-height: 1.1; }
+        .page-hero p.lead { font-size: 1.2rem; color: var(--text-muted); max-width: 780px; line-height: 1.7; margin-bottom: 2.5rem; }
+
+        /* Lifecycle Flow Visualizer */
+        .flow-visualizer-box {
+            background: var(--surface-card); border: 1px solid rgba(204, 255, 0, 0.3);
+            border-radius: 20px; padding: 2.5rem; margin-top: 2rem;
+        }
+        .flow-steps-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2rem; position: relative;
+        }
+        .flow-step-card {
+            background: #090909; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px;
+            padding: 1.8rem; display: flex; flex-direction: column; gap: 0.8rem;
+        }
+        .flow-step-card.active { border-color: var(--accent); background: rgba(204, 255, 0, 0.03); }
+        .flow-step-num { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); }
+
+        /* Economics Card */
+        .economics-banner {
+            background: #090909; border: 1px solid var(--surface-border);
+            border-radius: 16px; padding: 2rem; margin-top: 3.5rem;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+        }
+        .econ-stat-title { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .econ-stat-val { font-family: var(--font-accent); font-size: 1.8rem; font-weight: 700; color: var(--accent); }
+
+        .campaigns-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 3.5rem; }
+        .camp-card { background: var(--surface-card); border: 1px solid var(--surface-border); border-radius: 16px; padding: 2.2rem; }
+        .camp-card h3 { font-size: 1.35rem; margin-bottom: 0.8rem; }
+        .camp-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
+
+        footer { padding: 4rem 5% 2rem; border-top: 1px solid rgba(255, 255, 255, 0.04); background: #040404; text-align: center; }
+
+        @media (max-width: 900px) {
+            .flow-steps-grid, .campaigns-grid, .economics-banner { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="noise-overlay"></div>
+    <div class="ambient-glow ambient-glow-1"></div>
+    <div class="ambient-glow ambient-glow-2"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <nav>
+        <a href="index.html" class="logo clickable">
+            <div class="logo-symbol">S</div>
+            SCION<span>SYNTH</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="clickable">Home</a>
+            <a href="web-development.html" class="clickable">Web Dev</a>
+            <a href="real-estate-3d.html" class="clickable">3D Buildings</a>
+            <a href="google-business-seo.html" class="clickable">SEO & Maps</a>
+            <a href="email-marketing.html" class="clickable active">Email Flows</a>
+            <a href="whatsapp-automation.html" class="clickable">WhatsApp</a>
+            <a href="b2b-lead-research.html" class="clickable">B2B Leads</a>
+        </div>
+        <a href="index.html#contact" class="btn clickable" style="padding: 0.6rem 1.4rem; font-size: 0.82rem;">Book Audit</a>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="badge-tag">Service Specification · 04</div>
+            <h1>Email Marketing & <span class="text-accent">Lifecycle Automation</span></h1>
+            <p class="lead">
+                Acquiring a customer once is expensive; keeping them for years is pure profit. We construct automated email nurture flows, high-converting abandoned cart sequences, and editorial newsletters that turn your subscriber list into a predictable recurring revenue channel.
+            </p>
+            <div style="display: flex; gap: 1.2rem; flex-wrap: wrap;">
+                <a href="index.html#contact" class="btn clickable">Launch Email Engine</a>
+                <a href="#economics" class="btn btn-outline clickable">View Retainer Plans</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lifecycle Sequence Architecture -->
+    <section style="background: #090909; border-top: 1px solid var(--surface-border); border-bottom: 1px solid var(--surface-border);">
+        <div class="container">
+            <div class="badge-tag">Automated Revenue Funnel</div>
+            <h2>The 4 Core <span class="text-accent">Lifecycle Flows</span></h2>
+
+            <div class="flow-visualizer-box">
+                <p class="text-muted" style="max-width: 700px; line-height: 1.6;">
+                    These four automated sequences run 24/7 on autopilot. Once deployed, they generate 20%–35% of total store revenue without requiring extra ad spend.
+                </p>
+
+                <div class="flow-steps-grid">
+                    <div class="flow-step-card active">
+                        <div class="flow-step-num">FLOW 01 · DAY 0</div>
+                        <h4 style="font-size: 1.15rem;">Welcome & Brand Story</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Introduces your physical heritage, delivers discount perks, and establishes high domain sender authority.</p>
+                        <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent);">Avg Open Rate: 62%</div>
+                    </div>
+
+                    <div class="flow-step-card active">
+                        <div class="flow-step-num">FLOW 02 · 1 HR TRIGGER</div>
+                        <h4 style="font-size: 1.15rem;">Abandoned Cart Recovery</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Dynamic product image reminders, scarcity prompts, and 1-click checkout links to win back dropped checkouts.</p>
+                        <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent);">Avg Recovery Rate: 18%</div>
+                    </div>
+
+                    <div class="flow-step-card active">
+                        <div class="flow-step-num">FLOW 03 · POST PURCHASE</div>
+                        <h4 style="font-size: 1.15rem;">Thank You & Cross-Sell</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Care instructions, delivery tracking updates, and personalized recommendations for complementary goods.</p>
+                        <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent);">LTV Lift: +24%</div>
+                    </div>
+
+                    <div class="flow-step-card active">
+                        <div class="flow-step-num">FLOW 04 · 45-DAY INACTIVE</div>
+                        <h4 style="font-size: 1.15rem;">Winback & VIP Re-engagement</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Automated reactivation incentives for dormant customers before they fall off your customer base.</p>
+                        <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent);">Reactivation: 12%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Economics Banner -->
+            <div class="economics-banner" id="economics">
+                <div>
+                    <div class="econ-stat-title">Monthly Retainer</div>
+                    <div class="econ-stat-val">₹15k–₹40k</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Per client / month</div>
+                </div>
+                <div>
+                    <div class="econ-stat-title">Target Goal (₹1L–₹5L MRR)</div>
+                    <div class="econ-stat-val" style="color: #fff;">3–13 Clients</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">High retention retainers</div>
+                </div>
+                <div>
+                    <div class="econ-stat-title">Execution Complexity</div>
+                    <div class="econ-stat-val" style="color: #fff;">Medium</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Copywriting & design rigor</div>
+                </div>
+                <div>
+                    <div class="econ-stat-title">Ongoing Time Commitment</div>
+                    <div class="econ-stat-val" style="color: #25d366;">Low–Medium</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">2-4 monthly campaigns</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Campaign Types -->
+    <section>
+        <div class="container">
+            <div class="badge-tag">Full Campaign Management</div>
+            <h2>High-Impact <span class="text-accent">Broadcast Campaigns</span></h2>
+
+            <div class="campaigns-grid">
+                <div class="camp-card">
+                    <h3>🗞️ Weekly Curated Editorial Newsletters</h3>
+                    <p>We write educational, engaging newsletters that your audience actually looks forward to opening. We blend industry insights, brand stories, and product education without sounding like spam.</p>
+                </div>
+                <div class="camp-card">
+                    <h3>⚡ Flash Sale & Festival Launch Blasts</h3>
+                    <p>High-urgency promotional sequences designed for Diwali, New Year, Black Friday, and seasonal inventory clearances with countdown timers and VIP early access.</p>
+                </div>
+                <div class="camp-card">
+                    <h3>🎯 Audience Segmentation & Tagging</h3>
+                    <p>We segment your list into High-Spenders, First-Time Buyers, Window Shoppers, and Inactive Leads so everyone receives hyper-relevant offers matching their behavior.</p>
+                </div>
+                <div class="camp-card">
+                    <h3>🛡️ Deliverability & Inbox Placement Audit</h3>
+                    <p>Custom SPF, DKIM, DMARC records, and dedicated list hygiene protocols ensuring your emails consistently land in the Primary Inbox, not the Spam folder.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 4.5rem;">
+                <a href="index.html#contact" class="btn clickable">Book Email Architecture Audit</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p style="color: var(--text-muted); font-size: 0.9rem;">&copy; 2026 Scionsynth. Lifecycle Email Infrastructure & Retention Systems.</p>
+            <p style="margin-top: 0.5rem;"><a href="index.html" class="clickable text-accent" style="text-decoration: none;">&larr; Back to Main Platform</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorRing = document.querySelector('.cursor-ring');
+        document.addEventListener('mousemove', e => {
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+            setTimeout(() => {
+                cursorRing.style.left = e.clientX + 'px';
+                cursorRing.style.top = e.clientY + 'px';
+            }, 45);
+        });
+
+        document.querySelectorAll('.clickable, a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        });
+    </script>
+</body>
+</html>
